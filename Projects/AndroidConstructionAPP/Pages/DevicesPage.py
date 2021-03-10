@@ -6,13 +6,14 @@ from Projects.AndroidConstructionAPP.Pages.RoomPage import RoomPage
 
 class DevicesPage(ElementLoader, unittest.TestCase):
     driver = AutoDriver()
-    ElementLoader = ElementLoader()
+    #ElementLoader = ElementLoader()
     ProjectPage = ProjectPage()
     RoomPage = RoomPage()
-    device_names = self.driver.find_elements_until_visibility(ElementLoader.locator("device_name"))
+    #device_names = driver.find_elements_until_visibility(ElementLoader.locator("device_name"))
+    #more_btn = driver.find_element_until_visibility(ElementLoader.locator("room_more_btn"))
 
-    #def __init__(self):
-        #ElementLoader.__init__(self, self.__class__.__name__)
+    def __init__(self):
+        ElementLoader.__init__(self, self.__class__.__name__)
 
     def into_devicePage(self):
         """
@@ -24,13 +25,107 @@ class DevicesPage(ElementLoader, unittest.TestCase):
         #进入设备列表页面
         self.RoomPage.into_rommPage()
 
+    def back(self):
+        self.driver.click_device_btn(4)
+
     def get_device_name(self, num=0):
         """
         获取设备名称
         :param num:默认获取第一个设备
         :return:
         """
-        device_name = self.device_names[num].text
+        device_names = self.driver.find_elements_until_visibility(self.locator("device_name"))
+        device_name = device_names[num].text
         return device_name
+
+    def get_device_num(self):
+        """
+        获取设备
+        :return:设备数
+        """
+        #判断是否存在tv_device_online_status元素，不存在就返回0
+        device_names = self.driver.find_elements_until_visibility(self.locator("device_name"))
+        flag = self.driver.is_element(self.locator("device_status"))
+        if flag:
+            device_nums = len(device_names)
+        else:
+            device_nums = 0
+        return device_nums
+
+    def set_room_name(self, roomName=None):
+        """
+        设置房间名称
+        :return:
+        """
+        room_name_btn = self.driver.find_element_until_visibility(self.locator("room_name_btn"))
+        self.driver.click(room_name_btn)
+        roomName_text = self.driver.find_element_until_visibility(self.locator("name_text"))
+        self.driver.send_keys(roomName_text, roomName)
+        done_btn = self.driver.find_element_until_visibility(self.locator("done_btn"))
+        self.driver.click(done_btn)
+
+    def into_deviceMore_page(self, num=0):
+        """
+        进入设备更多页面，默认第一个设备
+        :param num: 默认第一个设备
+        :return:
+        """
+        device_names = self.driver.find_element_until_visibility(self.locator("device_name"))
+        self.driver.click(device_names[num])
+        flag = self.driver.is_element(self.locator("device_more_title"))
+        if flag:
+            print("已进入设备更多页")
+        else:
+            more_btn = self.driver.find_element_until_visibility(self.locator("more_btn"))
+            self.driver.click(more_btn)
+
+    def set_device_name(self, name=None):
+        """
+        设置设备名称
+        :param name:
+        :return:
+        """
+        self.into_deviceMore_page(0)
+        device_name_btn = self.driver.find_element_until_visibility(self.locator("device_name"))
+        self.driver.click(device_name_btn)
+        device_name_text = self.driver.find_element_until_visibility(self.locator("name_text"))
+        self.driver.send_keys(device_name_btn, name)
+        done_btn = self.driver.find_element_until_visibility(self.locator("done_btn"))
+        self.driver.click(done_btn)
+
+    def set_device_function_name(self, name=None):
+        """
+        设置开关重命名
+        :param name:
+        :return:
+        """
+        device_function_name = self.driver.find_element_until_visibility(self.locator("device_function_name"))
+        self.driver.click(device_function_name)
+        tv_nicknames = self.driver.find_elements_until_visibility(self.locator("tv_nickname"))
+        self.driver.click(tv_nicknames[0])
+        nickname_text = self.driver.find_element_until_visibility(self.locator("name_text"))
+        self.driver.send_keys(nickname_text, name)
+        done_btn = self.driver.find_element_until_visibility(self.locator("done_btn"))
+        self.driver.click(done_btn)
+
+    def set_device_pointName(self, name=None):
+        """
+        设置设备点位
+        :param name:
+        :return:
+        """
+        rl_location = self.driver.find_element_until_visibility(self.locator("rl_location"))
+        self.driver.click(rl_location)
+        rl_region_name = self.driver.find_element_until_visibility(self.locator("rl_region_name"))
+        self.driver.click(rl_region_name)
+        region_name_text = self.driver.find_element_until_visibility(self.locator("name_text"))
+        self.driver.send_keys(region_name_text, name)
+        done_btn = self.driver.find_element_until_visibility(self.locator("done_btn"))
+        self.driver.click(done_btn)
+
+
+
+
+
 
 

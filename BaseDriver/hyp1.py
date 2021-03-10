@@ -21,6 +21,19 @@ def test2(n):
             i -= 1
     return sum2
 
+#冒泡排序
+def bubble_sort(list):
+    for i in range(len(list)-1):
+        for j in range(len(list)-1-i):
+            if list[j] > list[j+1]:
+                list[j], list[j+1] = list[j+1], list[j]
+
+    return list
+
+
 if __name__ == "__main__":
     print(test1(5))
     print(test2(5))
+    list1 = [10, 17, 50, 7, 30, 24, 27, 45, 15, 5, 36, 21]
+    print(bubble_sort(list1))
+
