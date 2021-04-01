@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+message Result{
+  /**
+  是否成功，true成功，false失败
+   */
+  bool result=1;
+}

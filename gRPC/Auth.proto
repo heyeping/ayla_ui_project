@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+import "Base.proto";
+/**
+登录相关接口
+ */
+service AuthService{
+
+  /**
+  发送验证码
+   */
+  rpc sendVerificationCode(VerificationCodeReq) returns (Result);
+
+  /**
+  登录
+   */
+  rpc login(LoginReq) returns (Token);
+}
+
+/**
+发送验证码入参
+ */
+message VerificationCodeReq{
+  /**
+  手机号
+   */
+  string phone = 1;
+}
+
+/**
+登录入参
+ */
+message LoginReq{
+  /**
+  手机号
+   */
+  string phone = 1;
+  /**
+  验证码
+   */
+  string verificationCode = 2;
+}
+
+/**
+登录出参
+ */
+message Token{
+  /**
+  token
+   */
+  string authToken = 1;
+  /**
+  刷新token
+   */
+  string refreshToken = 2;
+  /**
+  过期时间
+   */
+  int64 expireTime = 3;
+}
