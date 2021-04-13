@@ -1,0 +1,10 @@
+testhost:
+  ads: 106.15.231.103:9098
+
+user:
+  phone: 13267925075
+  verCode: xxx
+
+devices:
+  cuId:
+  deviceId:

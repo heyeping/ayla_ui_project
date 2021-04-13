@@ -1,0 +1,26 @@
+syntax = "proto3";
+option java_package = "com.aylaasia.referenceapp.grpc";
+import "google/protobuf/empty.proto";
+/**
+用户相关接口
+ */
+service UserService{
+  /**
+  获取用户信息
+   */
+  rpc getUserInfo(google.protobuf.Empty) returns (User);
+}
+
+/**
+用户
+ */
+message User{
+  /**
+  昵称
+   */
+  string nickName = 1;
+  /**
+  手机号
+   */
+  string phone = 2;
+}
