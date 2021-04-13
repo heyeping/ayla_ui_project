@@ -16,7 +16,7 @@ def bindDeviceTest():
     stub = DeviceService_pb2_grpc.DeviceServiceStub(channel)
 
     #请求设备列表接口
-    token ='eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMzAwNjA1NzAyNjE5ODUyODQyIiwidXNlck5hbWUiOiIxMzI2NzkyNTA3NSIsImxvZ2luVHlwZSI6IjMiLCJsb2dpblNvdXJjZSI6IjExIiwiYXlsYUFwcGxpY2F0aW9uSWQiOiIxMCIsInR5cGUiOiJhdXRoX3Rva2VuIiwiaWF0IjoxNjE3MjU2NDg0fQ.P63_aEEUfYNxanf8M2zZPRo8dbnXaIdmJf6BwfCTyVU'
+    token ='eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMzAwNjA1NzAyNjE5ODUyODQyIiwidXNlck5hbWUiOiIxMzI2NzkyNTA3NSIsImxvZ2luVHlwZSI6IjMiLCJsb2dpblNvdXJjZSI6IjExIiwiYXlsYUFwcGxpY2F0aW9uSWQiOiIxMCIsInR5cGUiOiJhdXRoX3Rva2VuIiwiaWF0IjoxNjE3MzMyOTY2fQ.zzWqlRTzFgZZn7IAttGs4RgLDIEqELVNOSFKLEJheJE'
     #token2 = token.lower()
     #print(token2)
     response = stub.bindDevice(

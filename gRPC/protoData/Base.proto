@@ -1,8 +1,9 @@
 syntax = "proto3";
+option java_package = "com.aylaasia.referenceapp.grpc";
 
 message Result{
   /**
   是否成功，true成功，false失败
    */
-  bool result=1;
+  bool result = 1;
 }

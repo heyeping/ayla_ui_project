@@ -48,6 +48,16 @@ class DeviceServiceStub(object):
                 request_serializer=DeviceService__pb2.GetDevicePropertyReq.SerializeToString,
                 response_deserializer=DeviceService__pb2.DevicePropertyResp.FromString,
                 )
+        self.getDeviceProperties = channel.unary_unary(
+                '/DeviceService/getDeviceProperties',
+                request_serializer=DeviceService__pb2.GetDevicePropertiesReq.SerializeToString,
+                response_deserializer=DeviceService__pb2.GetDevicePropertiesResp.FromString,
+                )
+        self.updateDevice = channel.unary_unary(
+                '/DeviceService/updateDevice',
+                request_serializer=DeviceService__pb2.UpdateDeviceReq.SerializeToString,
+                response_deserializer=DeviceService__pb2.Device.FromString,
+                )
 
 
 class DeviceServiceServicer(object):
@@ -103,6 +113,22 @@ class DeviceServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def getDeviceProperties(self, request, context):
+        """*
+        获取设备所有属性值
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def updateDevice(self, request, context):
+        """*
+        编辑设备信息
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_DeviceServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -135,6 +161,16 @@ def add_DeviceServiceServicer_to_server(servicer, server):
                     servicer.getDeviceProperty,
                     request_deserializer=DeviceService__pb2.GetDevicePropertyReq.FromString,
                     response_serializer=DeviceService__pb2.DevicePropertyResp.SerializeToString,
+            ),
+            'getDeviceProperties': grpc.unary_unary_rpc_method_handler(
+                    servicer.getDeviceProperties,
+                    request_deserializer=DeviceService__pb2.GetDevicePropertiesReq.FromString,
+                    response_serializer=DeviceService__pb2.GetDevicePropertiesResp.SerializeToString,
+            ),
+            'updateDevice': grpc.unary_unary_rpc_method_handler(
+                    servicer.updateDevice,
+                    request_deserializer=DeviceService__pb2.UpdateDeviceReq.FromString,
+                    response_serializer=DeviceService__pb2.Device.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -247,5 +283,39 @@ class DeviceService(object):
         return grpc.experimental.unary_unary(request, target, '/DeviceService/getDeviceProperty',
             DeviceService__pb2.GetDevicePropertyReq.SerializeToString,
             DeviceService__pb2.DevicePropertyResp.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def getDeviceProperties(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/DeviceService/getDeviceProperties',
+            DeviceService__pb2.GetDevicePropertiesReq.SerializeToString,
+            DeviceService__pb2.GetDevicePropertiesResp.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def updateDevice(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/DeviceService/updateDevice',
+            DeviceService__pb2.UpdateDeviceReq.SerializeToString,
+            DeviceService__pb2.Device.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

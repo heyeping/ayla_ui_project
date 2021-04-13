@@ -5,10 +5,11 @@
 #@time: 2021/3/30 4:41 PM
 #编译命令：python3 -m grpc_tools.protoc --python_out=../pb_files --grpc_python_out=../pb_files -I. DeviceService.proto
 
-from gRPC.conmon.Op_config import Config
+from gRPC.util.Op_config import Config
 from gRPC.pb_files import DeviceService_pb2
 from gRPC.pb_files import DeviceService_pb2_grpc
 from gRPC.client.Login_client import LoginClient
+from google.protobuf.json_format import MessageToJson
 import grpc,json,os
 from loguru import logger
 
@@ -21,16 +22,20 @@ class Device_client():
         """
         self.address = address
         self.chanel = grpc.insecure_channel(self.address)
-        # 调用gpr服务
-        self.stub = DeviceService_pb2_grpc.DeviceServiceStub(self.chanel)
+        self.file = file
+        # 从yaml文件中读取token
+        self.token = Config(self.file).readYaml("common", "token")
+        try:
+            grpc.channel_ready_future(self.chanel).result(timeout=10)
+        except grpc.FutureTimeoutError:
+            sys.exit('Error connection to server')
+        else:
+            # 调用gpr服务
+            self.stub = DeviceService_pb2_grpc.DeviceServiceStub(self.chanel)
         #调用LogintClient，获取token
         #self.login_client = LoginClient(self.address)
         #self.token = self.login_client.login(phone, verificationCode)
         #print(self.token)
-        self.file = file
-        #从yaml文件中读取token
-        self.token = Config(self.file).readYaml("common", "token")
-
 
     def binDevice(self, cuId, deviceId, nickName):
         """
@@ -46,10 +51,12 @@ class Device_client():
                 request=DeviceService_pb2.BindDeviceReq(cuId=cuId, deviceId=deviceId, nickName=nickName),
                 metadata=(('authorization', self.token),)
             )
-            print(response)
-            logger.info("绑定设备接口返回===>>{}".format(response))
+            #response = MessageToJson(response)
+            logger.info("绑定设备接口返回===>>{}".format(response.result))
         except grpc.RpcError as e:
             print(e.code())
+        else:
+            print(response)
 
     def getDeviceList(self):
         """
@@ -59,9 +66,13 @@ class Device_client():
         try:
             #请求获取设备列表接口
             response = self.stub.getDeviceList(request=DeviceService_pb2.DeviceListResp(), metadata=(('authorization', self.token),))
-            print(response)
+            #将protobuf对象序列化为JSON
+            response = MessageToJson(response)
         except grpc.RpcError as e:
             print(e.code())
+        else:
+            logger.info("绑定设备接口返回===>>\n{}".format(response))
+            #print(grpc.StatusCode.OK)
 
     def getDeviceInfo(self, deviceId):
         """
@@ -69,10 +80,15 @@ class Device_client():
         :param deviceId: dsn
         :return:
         """
-        response = self.stub.getDeviceInfo(
-            request=DeviceService_pb2.DeviceReq(deviceId=deviceId),
-            metadata=(('authorization', self.token),)
-        )
+        try:
+            response = self.stub.getDeviceInfo(
+                request=DeviceService_pb2.DeviceReq(deviceId=deviceId),
+                metadata=(('authorization', self.token),)
+            )
+        except grpc.RpcError as e:
+            print(e.code())
+        else:
+            logger.info("获取设备信息接口返回===>>\n{}".format(response))
 
     def setDeviceProperty(self, deviceId, propertyName, propertyValue):
         """
@@ -99,7 +115,10 @@ class Device_client():
         :param propertyName: 属性名称
         :return:
         """
-
+        response = self.stub.getDeviceProperty(
+            request=DeviceService_pb2.GetDevicePropertyReq(deviceId=deviceId),
+            metadata=(('authorization', self.token),)
+        )
 
 if __name__ == "__main__":
     ads = "106.15.231.103:9098"
@@ -111,4 +130,5 @@ if __name__ == "__main__":
     nickName = ""
     dc.binDevice(cuId,deviceId,nickName)
     dc.getDeviceList()
+    dc.getDeviceInfo(deviceId)
 

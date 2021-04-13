@@ -15,7 +15,7 @@ def getToken():
     #调用rpc服务
     stub = auth_pb2_grpc.AuthServiceStub(channel)
     #请求登录接口
-    response = stub.login(auth_pb2.LoginReq(phone="13267925075",verificationCode="163356"))
+    response = stub.login(auth_pb2.LoginReq(phone="13267925075",verificationCode="146545"))
     #print("received:", response)
     #print("authToken:", response.authToken)
     result = str(response)

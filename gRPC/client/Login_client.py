@@ -8,7 +8,7 @@ import os
 from gRPC.pb_files import Auth_pb2
 from gRPC.pb_files import Auth_pb2_grpc
 import grpc
-from gRPC.conmon.Op_config import Config
+from gRPC.util.Op_config import Config
 
 class LoginClient():
 
@@ -45,25 +45,26 @@ class LoginClient():
         """
         #请求登录接口
         response = self.stub.login(Auth_pb2.LoginReq(phone=phone, verificationCode=verificationCode))
+        print(response)
+        base_url = os.path.abspath(os.path.dirname(os.getcwd()))
         if 'authToken' in str(response):
             print("登录成功")
             token = str(response.authToken)
+            data = {
+                "common": {
+                    "token": token
+                }
+            }
+            # 把token写入yaml文件中
+            yamlFile = os.path.join(base_url, 'config', 'token.yaml')
+            Config(yamlFile).writeYaml(data)
         else:
             print("登录失败")
-        data = {
-            "common": {
-                "token": token
-            }
-        }
-        base_url = os.path.abspath(os.path.dirname(os.getcwd()))
-        #把token写入yaml文件中
-        yamlFile = os.path.join(base_url, 'config', 'token.yaml')
-        Config(yamlFile).writeYaml(data)
 
 if __name__ == "__main__":
     ads = "106.15.231.103:9098"
     phone = "13267925075"
-    verCode = "735531"
+    verCode = "146545"
     loginTest = LoginClient(ads)
     #loginTest.sendCode("13267925075")
     token = loginTest.login(phone,verCode)

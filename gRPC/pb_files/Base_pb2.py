@@ -17,9 +17,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='Base.proto',
   package='',
   syntax='proto3',
-  serialized_options=None,
+  serialized_options=b'\n\036com.aylaasia.referenceapp.grpc',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\nBase.proto\"\x18\n\x06Result\x12\x0e\n\x06result\x18\x01 \x01(\x08\x62\x06proto3'
+  serialized_pb=b'\n\nBase.proto\"\x18\n\x06Result\x12\x0e\n\x06result\x18\x01 \x01(\x08\x42 \n\x1e\x63om.aylaasia.referenceapp.grpcb\x06proto3'
 )
 
 
@@ -67,4 +67,5 @@ Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,),
 _sym_db.RegisterMessage(Result)
 
 
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

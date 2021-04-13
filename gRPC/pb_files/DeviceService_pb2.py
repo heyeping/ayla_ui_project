@@ -19,9 +19,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='DeviceService.proto',
   package='',
   syntax='proto3',
-  serialized_options=None,
+  serialized_options=b'\n\036com.aylaasia.referenceapp.grpc',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x13\x44\x65viceService.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\nBase.proto\"A\n\rBindDeviceReq\x12\x0c\n\x04\x63uId\x18\x01 \x01(\x05\x12\x10\n\x08\x64\x65viceId\x18\x02 \x01(\t\x12\x10\n\x08nickName\x18\x03 \x01(\t\")\n\x0e\x44\x65viceListResp\x12\x17\n\x06\x64\x65vice\x18\x01 \x03(\x0b\x32\x07.Device\"\x1d\n\tDeviceReq\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\"\x89\x01\n\x06\x44\x65vice\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\x12\x10\n\x08nickName\x18\x02 \x01(\t\x12\x18\n\x10\x63onnectionStatus\x18\x03 \x01(\t\x12\x17\n\x0f\x66irmwareVersion\x18\x04 \x01(\t\x12\x12\n\nmacAddress\x18\x05 \x01(\t\x12\x14\n\x0c\x63onnectivity\x18\x06 \x01(\t\"#\n\x0fUnBindDeviceReq\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\"4\n\x10UnBindDeviceResp\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\x12\x0e\n\x06result\x18\x02 \x01(\x08\"U\n\x14SetDevicePropertyReq\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\x12\x14\n\x0cpropertyName\x18\x02 \x01(\t\x12\x15\n\rpropertyValue\x18\x03 \x01(\t\">\n\x14GetDevicePropertyReq\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\x12\x14\n\x0cpropertyName\x18\x02 \x01(\t\"O\n\x12\x44\x65vicePropertyResp\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\x12\'\n\x0e\x64\x65viceProperty\x18\x02 \x01(\x0b\x32\x0f.DeviceProperty\"=\n\x0e\x44\x65viceProperty\x12\x14\n\x0cpropertyName\x18\x01 \x01(\t\x12\x15\n\rpropertyValue\x18\x02 \x01(\t2\xc1\x02\n\rDeviceService\x12%\n\nbindDevice\x12\x0e.BindDeviceReq\x1a\x07.Result\x12\x38\n\rgetDeviceList\x12\x16.google.protobuf.Empty\x1a\x0f.DeviceListResp\x12$\n\rgetDeviceInfo\x12\n.DeviceReq\x1a\x07.Device\x12\x33\n\x0cunBindDevice\x12\x10.UnBindDeviceReq\x1a\x11.UnBindDeviceResp\x12\x33\n\x11setDeviceProperty\x12\x15.SetDevicePropertyReq\x1a\x07.Result\x12?\n\x11getDeviceProperty\x12\x15.GetDevicePropertyReq\x1a\x13.DevicePropertyRespb\x06proto3'
+  serialized_pb=b'\n\x13\x44\x65viceService.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\nBase.proto\"A\n\rBindDeviceReq\x12\x0c\n\x04\x63uId\x18\x01 \x01(\x05\x12\x10\n\x08\x64\x65viceId\x18\x02 \x01(\t\x12\x10\n\x08nickName\x18\x03 \x01(\t\"*\n\x0e\x44\x65viceListResp\x12\x18\n\x07\x64\x65vices\x18\x01 \x03(\x0b\x32\x07.Device\"\x1d\n\tDeviceReq\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\"\x89\x01\n\x06\x44\x65vice\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\x12\x10\n\x08nickName\x18\x02 \x01(\t\x12\x18\n\x10\x63onnectionStatus\x18\x03 \x01(\t\x12\x17\n\x0f\x66irmwareVersion\x18\x04 \x01(\t\x12\x12\n\nmacAddress\x18\x05 \x01(\t\x12\x14\n\x0c\x63onnectivity\x18\x06 \x01(\t\"#\n\x0fUnBindDeviceReq\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\"4\n\x10UnBindDeviceResp\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\x12\x0e\n\x06result\x18\x02 \x01(\x08\"U\n\x14SetDevicePropertyReq\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\x12\x14\n\x0cpropertyName\x18\x02 \x01(\t\x12\x15\n\rpropertyValue\x18\x03 \x01(\t\">\n\x14GetDevicePropertyReq\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\x12\x14\n\x0cpropertyName\x18\x02 \x01(\t\"O\n\x12\x44\x65vicePropertyResp\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\x12\'\n\x0e\x64\x65viceProperty\x18\x02 \x01(\x0b\x32\x0f.DeviceProperty\"*\n\x16GetDevicePropertiesReq\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\"D\n\x17GetDevicePropertiesResp\x12)\n\x10\x64\x65viceProperties\x18\x01 \x03(\x0b\x32\x0f.DeviceProperty\"=\n\x0e\x44\x65viceProperty\x12\x14\n\x0cpropertyName\x18\x01 \x01(\t\x12\x15\n\rpropertyValue\x18\x02 \x01(\t\"5\n\x0fUpdateDeviceReq\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\x12\x10\n\x08nickName\x18\x02 \x01(\t2\xb6\x03\n\rDeviceService\x12%\n\nbindDevice\x12\x0e.BindDeviceReq\x1a\x07.Result\x12\x38\n\rgetDeviceList\x12\x16.google.protobuf.Empty\x1a\x0f.DeviceListResp\x12$\n\rgetDeviceInfo\x12\n.DeviceReq\x1a\x07.Device\x12\x33\n\x0cunBindDevice\x12\x10.UnBindDeviceReq\x1a\x11.UnBindDeviceResp\x12\x33\n\x11setDeviceProperty\x12\x15.SetDevicePropertyReq\x1a\x07.Result\x12?\n\x11getDeviceProperty\x12\x15.GetDevicePropertyReq\x1a\x13.DevicePropertyResp\x12H\n\x13getDeviceProperties\x12\x17.GetDevicePropertiesReq\x1a\x18.GetDevicePropertiesResp\x12)\n\x0cupdateDevice\x12\x10.UpdateDeviceReq\x1a\x07.DeviceB \n\x1e\x63om.aylaasia.referenceapp.grpcb\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,Base__pb2.DESCRIPTOR,])
 
@@ -83,7 +83,7 @@ _DEVICELISTRESP = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='device', full_name='DeviceListResp.device', index=0,
+      name='devices', full_name='DeviceListResp.devices', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -102,7 +102,7 @@ _DEVICELISTRESP = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=131,
-  serialized_end=172,
+  serialized_end=173,
 )
 
 
@@ -133,8 +133,8 @@ _DEVICEREQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=174,
-  serialized_end=203,
+  serialized_start=175,
+  serialized_end=204,
 )
 
 
@@ -200,8 +200,8 @@ _DEVICE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=206,
-  serialized_end=343,
+  serialized_start=207,
+  serialized_end=344,
 )
 
 
@@ -232,8 +232,8 @@ _UNBINDDEVICEREQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=345,
-  serialized_end=380,
+  serialized_start=346,
+  serialized_end=381,
 )
 
 
@@ -271,8 +271,8 @@ _UNBINDDEVICERESP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=382,
-  serialized_end=434,
+  serialized_start=383,
+  serialized_end=435,
 )
 
 
@@ -317,8 +317,8 @@ _SETDEVICEPROPERTYREQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=436,
-  serialized_end=521,
+  serialized_start=437,
+  serialized_end=522,
 )
 
 
@@ -356,8 +356,8 @@ _GETDEVICEPROPERTYREQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=523,
-  serialized_end=585,
+  serialized_start=524,
+  serialized_end=586,
 )
 
 
@@ -395,8 +395,72 @@ _DEVICEPROPERTYRESP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=587,
-  serialized_end=666,
+  serialized_start=588,
+  serialized_end=667,
+)
+
+
+_GETDEVICEPROPERTIESREQ = _descriptor.Descriptor(
+  name='GetDevicePropertiesReq',
+  full_name='GetDevicePropertiesReq',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='deviceId', full_name='GetDevicePropertiesReq.deviceId', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=669,
+  serialized_end=711,
+)
+
+
+_GETDEVICEPROPERTIESRESP = _descriptor.Descriptor(
+  name='GetDevicePropertiesResp',
+  full_name='GetDevicePropertiesResp',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='deviceProperties', full_name='GetDevicePropertiesResp.deviceProperties', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=713,
+  serialized_end=781,
 )
 
 
@@ -434,12 +498,52 @@ _DEVICEPROPERTY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=668,
-  serialized_end=729,
+  serialized_start=783,
+  serialized_end=844,
 )
 
-_DEVICELISTRESP.fields_by_name['device'].message_type = _DEVICE
+
+_UPDATEDEVICEREQ = _descriptor.Descriptor(
+  name='UpdateDeviceReq',
+  full_name='UpdateDeviceReq',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='deviceId', full_name='UpdateDeviceReq.deviceId', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='nickName', full_name='UpdateDeviceReq.nickName', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=846,
+  serialized_end=899,
+)
+
+_DEVICELISTRESP.fields_by_name['devices'].message_type = _DEVICE
 _DEVICEPROPERTYRESP.fields_by_name['deviceProperty'].message_type = _DEVICEPROPERTY
+_GETDEVICEPROPERTIESRESP.fields_by_name['deviceProperties'].message_type = _DEVICEPROPERTY
 DESCRIPTOR.message_types_by_name['BindDeviceReq'] = _BINDDEVICEREQ
 DESCRIPTOR.message_types_by_name['DeviceListResp'] = _DEVICELISTRESP
 DESCRIPTOR.message_types_by_name['DeviceReq'] = _DEVICEREQ
@@ -449,7 +553,10 @@ DESCRIPTOR.message_types_by_name['UnBindDeviceResp'] = _UNBINDDEVICERESP
 DESCRIPTOR.message_types_by_name['SetDevicePropertyReq'] = _SETDEVICEPROPERTYREQ
 DESCRIPTOR.message_types_by_name['GetDevicePropertyReq'] = _GETDEVICEPROPERTYREQ
 DESCRIPTOR.message_types_by_name['DevicePropertyResp'] = _DEVICEPROPERTYRESP
+DESCRIPTOR.message_types_by_name['GetDevicePropertiesReq'] = _GETDEVICEPROPERTIESREQ
+DESCRIPTOR.message_types_by_name['GetDevicePropertiesResp'] = _GETDEVICEPROPERTIESRESP
 DESCRIPTOR.message_types_by_name['DeviceProperty'] = _DEVICEPROPERTY
+DESCRIPTOR.message_types_by_name['UpdateDeviceReq'] = _UPDATEDEVICEREQ
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 BindDeviceReq = _reflection.GeneratedProtocolMessageType('BindDeviceReq', (_message.Message,), {
@@ -515,6 +622,20 @@ DevicePropertyResp = _reflection.GeneratedProtocolMessageType('DevicePropertyRes
   })
 _sym_db.RegisterMessage(DevicePropertyResp)
 
+GetDevicePropertiesReq = _reflection.GeneratedProtocolMessageType('GetDevicePropertiesReq', (_message.Message,), {
+  'DESCRIPTOR' : _GETDEVICEPROPERTIESREQ,
+  '__module__' : 'DeviceService_pb2'
+  # @@protoc_insertion_point(class_scope:GetDevicePropertiesReq)
+  })
+_sym_db.RegisterMessage(GetDevicePropertiesReq)
+
+GetDevicePropertiesResp = _reflection.GeneratedProtocolMessageType('GetDevicePropertiesResp', (_message.Message,), {
+  'DESCRIPTOR' : _GETDEVICEPROPERTIESRESP,
+  '__module__' : 'DeviceService_pb2'
+  # @@protoc_insertion_point(class_scope:GetDevicePropertiesResp)
+  })
+_sym_db.RegisterMessage(GetDevicePropertiesResp)
+
 DeviceProperty = _reflection.GeneratedProtocolMessageType('DeviceProperty', (_message.Message,), {
   'DESCRIPTOR' : _DEVICEPROPERTY,
   '__module__' : 'DeviceService_pb2'
@@ -522,7 +643,15 @@ DeviceProperty = _reflection.GeneratedProtocolMessageType('DeviceProperty', (_me
   })
 _sym_db.RegisterMessage(DeviceProperty)
 
+UpdateDeviceReq = _reflection.GeneratedProtocolMessageType('UpdateDeviceReq', (_message.Message,), {
+  'DESCRIPTOR' : _UPDATEDEVICEREQ,
+  '__module__' : 'DeviceService_pb2'
+  # @@protoc_insertion_point(class_scope:UpdateDeviceReq)
+  })
+_sym_db.RegisterMessage(UpdateDeviceReq)
 
+
+DESCRIPTOR._options = None
 
 _DEVICESERVICE = _descriptor.ServiceDescriptor(
   name='DeviceService',
@@ -531,8 +660,8 @@ _DEVICESERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=732,
-  serialized_end=1053,
+  serialized_start=902,
+  serialized_end=1340,
   methods=[
   _descriptor.MethodDescriptor(
     name='bindDevice',
@@ -591,6 +720,26 @@ _DEVICESERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_GETDEVICEPROPERTYREQ,
     output_type=_DEVICEPROPERTYRESP,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='getDeviceProperties',
+    full_name='DeviceService.getDeviceProperties',
+    index=6,
+    containing_service=None,
+    input_type=_GETDEVICEPROPERTIESREQ,
+    output_type=_GETDEVICEPROPERTIESRESP,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='updateDevice',
+    full_name='DeviceService.updateDevice',
+    index=7,
+    containing_service=None,
+    input_type=_UPDATEDEVICEREQ,
+    output_type=_DEVICE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),

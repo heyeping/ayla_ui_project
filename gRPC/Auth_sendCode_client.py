@@ -7,11 +7,14 @@
 import grpc
 import auth_pb2
 import auth_pb2_grpc
+from gRPC.util.CertCreate import CertCreate
 
 def run():
 
-    #连接rpc服务器
-    channel = grpc.insecure_channel('106.15.231.103:9098')
+    #获取安全证书
+    cert = CertCreate()
+    #连接rpc服务器，不是HTTPS不需要证书可以使用grpc.insecure_channel()
+    channel = grpc.secure_channel(target="referenceapp-test.ayla.com.cn:9098",credentials=cert)
     #调用rpc服务
     stub = auth_pb2_grpc.AuthServiceStub(channel)
     #response1 = stub.login(auth_pb2.LoginReq(phone="13267925075",verificationCode="123456"))
