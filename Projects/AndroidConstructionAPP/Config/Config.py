@@ -1,7 +1,7 @@
 login_data = {
     'account_error': '132679250787434',
     'account_01': '18002549655',
-    'passwd_01': 'Aa12345678',
+    'passwd_01': 'Aa123456',
     'passwd_error': '12345',
     'passwd_null': '',
     'account_null': ''

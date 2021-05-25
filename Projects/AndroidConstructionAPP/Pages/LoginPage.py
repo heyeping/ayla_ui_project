@@ -3,7 +3,7 @@ from BaseDriver.Driver import AutoDriver
 from Helper.ElementLoader import ElementLoader
 import unittest,time
 
-class LoginPage(ElementLoader, unittest.TestCase):
+class LoginPage(ElementLoader):
     driver = AutoDriver()
 
     def __init__(self):

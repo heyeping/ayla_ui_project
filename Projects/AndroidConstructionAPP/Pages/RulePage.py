@@ -150,3 +150,62 @@ class RulePage(ElementLoader, unittest.TestCase):
         save_btn = self.driver.find_element_until_visibility(self.locator("save_btn"))
         self.driver.click(save_btn)
 
+    def rule_nums(self):
+        """
+        统计联动的个数：通过tv_device_name元素的个数统计
+        判断是否存在tv_device_name元素
+        :return:
+        """
+        flag = self.driver.is_element(self.locator("device_names"))
+        if flag:
+            rule = self.driver.find_elements_until_visibility(self.locator("device_names"))
+            rule_nums = len(oneKey)
+        else:
+            rule_nums = 0
+        return rule_nums
+
+    def get_rule_status(self, mun=0):
+        """
+        获取某个联动当前的状态：开启/关闭
+        :param num:默认第一个
+        :return:
+        """
+        flag = self.driver.is_element(self.locator("device_names"))
+        if flag:
+            rules = self.driver.find_elements_until_visibility(self.locator("rule_status"))
+            rule_status = rules[mun].text
+            return rule_status
+        else:
+            return "no rule"
+
+    def change_rule_status(self, num=0):
+        """
+        改变联动状态
+        :param mun:默认第一个
+        :return:
+        """
+        flag = self.driver.is_element(self.locator("device_names"))
+        if flag:
+            status = self.driver.find_elements_until_visibility(self.locator("rule_status"))
+            self.driver.click(status[num])
+        else:
+            return "no rule"
+
+    def into_auto_rule(self, num=0):
+        """
+        进入原有的联动编辑页
+        :param num: 默认第一个
+        :return:
+        """
+        rules = self.driver.find_elements_until_visibility(self.locator("device_names"))
+        self.driver.click(rules[num])
+
+    def del_rule(self):
+        """
+        删除联动
+        :return:
+        """
+        rule_del_btn = self.driver.swipeElement("rule_del_btn")
+        self.driver.click(rule_del_btn)
+
+

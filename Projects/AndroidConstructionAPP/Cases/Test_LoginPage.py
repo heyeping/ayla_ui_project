@@ -2,11 +2,11 @@ from BaseDriver.Driver import AutoDriver
 from Projects.AndroidConstructionAPP.Pages.LoginPage import LoginPage
 from Projects.AndroidConstructionAPP.Pages.ProjectPage import ProjectPage
 from Projects.AndroidConstructionAPP.Config.Config import *
-import unittest
+import pytest
 import time
 
 
-class Test_LoginPage(unittest.TestCase):
+class Test_LoginPage():
     driver = AutoDriver()
     LoginPage = LoginPage()
     ProjectPage = ProjectPage()
@@ -131,4 +131,7 @@ class Test_LoginPage(unittest.TestCase):
         flag = self.ProjectPage.is_project_page()
         assert flag, '登录失败'
 
-
+if __name__ == "__main__":
+    current_dir = os.getcwd()
+    print(current_dir)
+    pytest.main(["-vs", 'Test_LoginPage.py'])

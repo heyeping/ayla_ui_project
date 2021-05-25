@@ -741,6 +741,29 @@ class AutoDriver(Singleton):
         x_location = element.getLocation().getX()
         pass
 
+    def swipeElement(self, ele):
+        """
+        滑动到指定元素
+        :param ele:
+        :param t:
+        :return:
+        """
+        # 获取屏幕宽度和高度
+        screen_width = int(self.driver.get_window_size()['width'])
+        screen_height = int(self.driver.get_window_size()['height'])
+        #默认没找到元素
+        is_find = False
+        while is_find is not True:
+            try:
+                ele_find = self.driver.find_element_by_id(ele)
+                is_find = True
+
+            except NoSuchElementException:
+                #操作上滑
+                self.swipe(screen_width*0.5, screen_height*0.9, screen_width*0.5, screen_height*0.2, 1000)
+        return ele_find
+
+
 if __name__ == '__main__':
     ele_class = "android.widget.RelativeLayout"
     text = "哈哈哈"

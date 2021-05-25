@@ -9,7 +9,7 @@ udid: '9YEDU18926003029' #此参数只有ios平台需要填写，被测手机的
 fullReset: False #通过卸载而不是清空数据来重置应用状态
 app: /Users/parson/Desktop/app/20200308/Lark_app_v3.3.0_20200308.apk #App存放路径
 noReset: True #在会话前重置应用状态
-pagesToRun: Test_RulePage #需要执行的测试用例集，为空执行全集用例
+pagesToRun: Test_LoginPage #需要执行的测试用例集，为空执行全集用例
 automationName: UiAutomator2
 newCommandTimeout: 10
 codeHub: git

@@ -17,15 +17,18 @@ casesDir = os.path.join(eutDir, "Projects", runningProject, "Cases")
 logPath = os.path.join(eutDir, "Log", "log.txt")
 reportPath = os.path.join(eutDir, "Report", "report.html")
 project_config_path = os.path.join(eutDir, "Projects", runningProject, "%s.yaml" % runningProject)
+print(project_config_path)
 with open(project_config_path, "r", encoding="utf-8") as f:
     project_config = yaml.load(f)
 
 pagesToRun = project_config["pagesToRun"]
+print(pagesToRun)
 modules = []
 for fileName in os.listdir(casesDir):
     if fileName.startswith("Test_") and fileName.endswith(".py"):
         moduleName = fileName[:-3]
         modules.append(moduleName)
+print(modules)
 
 
 class Test:
