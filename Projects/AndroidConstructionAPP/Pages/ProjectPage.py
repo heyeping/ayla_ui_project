@@ -30,8 +30,12 @@ class ProjectPage(ElementLoader, unittest.TestCase):
         从项目列表中获取项目个数
         :return: 项目数
         """
-        project = self.driver.find_elements_until_visibility(self.locator("project_type"))
-        number = len(project)
+        flag = self.driver.is_element(self.locator("project_type"))
+        if flag:
+            project = self.driver.find_elements_until_visibility(self.locator("project_type"))
+            number = len(project)
+        else:
+            number = 0
         return number
 
     def add_project(self, name = "", type=False):
@@ -43,9 +47,13 @@ class ProjectPage(ElementLoader, unittest.TestCase):
         """
         add_project_btn = self.driver.find_element_until_visibility(self.locator("project_add_btn"))
         self.driver.click(add_project_btn)
-        time.sleep(1)
-        project_name_field = self.driver.find_element_until_visibility(self.locator("project_name_text"))
+        time.sleep(2)
+        project_name_btn = self.driver.find_element_until_visibility(self.locator("project_name_btn"))
+        self.driver.click(project_name_btn)
+        project_name_field = self.driver.find_element_until_visibility(self.locator("project_name_field"))
         self.driver.send_keys(project_name_field, name)
+        v_done_btn = self.driver.find_element_until_visibility(self.locator("v_done"))
+        self.driver.click(v_done_btn)
         if type:
             zt_btn = self.driver.find_element_until_visibility(self.locator("project_type_zt"))
             self.driver.click(zt_btn)

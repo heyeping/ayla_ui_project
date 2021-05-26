@@ -20,6 +20,7 @@ from functools import reduce
 from appium.webdriver.common.touch_action import TouchAction
 from PIL import Image, ImageFile
 import imagehash
+import allure
 
 
 class Singleton(object):
@@ -762,6 +763,20 @@ class AutoDriver(Singleton):
                 #操作上滑
                 self.swipe(screen_width*0.5, screen_height*0.9, screen_width*0.5, screen_height*0.2, 1000)
         return ele_find
+
+    def save_screenshot(self, img_doc):
+        """
+        页面截屏保存截图
+        :param img_doc: 截图说明
+        :return:
+        """
+        base_url = os.getcwd()
+        file_name = base_url + "\\{}_{}.png".format(datetime.strftime(datetime.now(), "%Y%m%d%H%M%S"), img_doc)
+        self.driver.save_screenshot(file_name)
+        with open(file_name, mode="rb") as f:
+            file = f.read()
+            allure.attach(file, img_doc, allure.attachment_type.PNG)
+
 
 
 if __name__ == '__main__':
