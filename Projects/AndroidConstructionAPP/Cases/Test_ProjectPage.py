@@ -10,7 +10,7 @@ from Projects.AndroidConstructionAPP.Config.Config import *
 import pytest,allure
 import time, random
 
-class Test_LoginPage():
+class Test_ProjectPage():
     driver = AutoDriver()
     ProjectPage = ProjectPage()
 

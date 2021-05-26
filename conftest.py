@@ -6,10 +6,11 @@
 
 import pytest
 from selenium import webdriver
-import os
+from BaseDriver.Driver import AutoDriver
+import os, time
 import allure
 
-_driver = None
+_driver = AutoDriver()
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
@@ -32,21 +33,20 @@ def pytest_runtest_makereport(item, call):
                 extra = ''
             f.write(rep.nodeid + extra + "\n")
         #添加allure报告截图
-        if hasattr(_driver, "get_screenshot_as_pngg"):
-            with allure.step("添加失败截图..."):
-                allure.attach(_driver.get_screenshot_as_pngg(), "失败截图", allure.attachment_type.PNG)
+        with allure.step("添加失败截图..."):
+            allure.attach(_driver.save_screenshot(), "失败截图", allure.attachment_type.PNG)
 
-@pytest.fixture(scope='session')
-def appdriver():
-    global _driver
-    desired_caps = {}
-    desired_caps['platformName'] = 'Android'
-    desired_caps['platfromVersion'] = '10'
-    desired_caps['udid'] = '9YEDU18926003029'
-    desired_caps['appPackage'] = 'com.ayla.hotelsaas'
-    desired_caps['appActivity'] = 'com.ayla.hotelsaas.ui.SPlashActivity'
-    desired_caps['noReset'] = True
-    desired_caps['deviceName'] = 'Honor 10'
-    if _driver is None:
-        _driver = webdriver.Remote(command_executor="http://127.0.0.1:4723/wb/hub", desired_capabilities=desired_caps)
-    yield _driver
+# @pytest.fixture(scope='session')
+# def appdriver():
+#     global _driver
+#     desired_caps = {}
+#     desired_caps['platformName'] = 'Android'
+#     desired_caps['platfromVersion'] = '10'
+#     desired_caps['udid'] = '9YEDU18926003029'
+#     desired_caps['appPackage'] = 'com.ayla.hotelsaas'
+#     desired_caps['appActivity'] = 'com.ayla.hotelsaas.ui.SPlashActivity'
+#     desired_caps['noReset'] = True
+#     desired_caps['deviceName'] = 'Honor 10'
+#     if _driver is None:
+#         _driver = webdriver.Remote(command_executor='http://127.0.0.1:4723/wb/hub', desired_capabilities=desired_caps)
+#     yield _driver

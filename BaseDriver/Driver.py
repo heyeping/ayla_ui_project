@@ -604,6 +604,10 @@ class AutoDriver(Singleton):
         # 获取手机截屏并保存文件
         self.driver.get_screenshot_as_file(filename)
 
+    def save_screen_png(self):
+        #获取手机截屏
+        self.driver.get_screenshot_as_png()
+
     @classmethod
     def get_display_size(self, filename):
         # 此方法结合save_screenshot方法可获取IOS/Android的像素尺寸
@@ -764,18 +768,19 @@ class AutoDriver(Singleton):
                 self.swipe(screen_width*0.5, screen_height*0.9, screen_width*0.5, screen_height*0.2, 1000)
         return ele_find
 
-    def save_screenshot(self, img_doc):
+    def save_screenshot(self):
         """
         页面截屏保存截图
         :param img_doc: 截图说明
         :return:
         """
         base_url = os.getcwd()
-        file_name = base_url + "\\{}_{}.png".format(datetime.strftime(datetime.now(), "%Y%m%d%H%M%S"), img_doc)
+        file_time = time.strftime('%Y%m%d%H%M', time.localtime(time.time()))
+        file_name = base_url + str(file_time) + '.png'
         self.driver.save_screenshot(file_name)
         with open(file_name, mode="rb") as f:
             file = f.read()
-            allure.attach(file, img_doc, allure.attachment_type.PNG)
+        return file
 
 
 
