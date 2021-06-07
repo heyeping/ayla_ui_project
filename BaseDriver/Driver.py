@@ -782,6 +782,42 @@ class AutoDriver(Singleton):
             file = f.read()
         return file
 
+    def getSize(self):
+        """
+        获取屏幕宽高
+        :return:
+        """
+        x = self.driver.get_window_size()['width']
+        y = self.driver.get_window_size()['height']
+        return (x, y)
+
+    def swipe_control(self, direction = 'd'):
+        """
+        滑动，根据传入的参数控制滑动的方向：
+        swipe与flick，swipe函数支持设置滑动的持续时间，
+        flick将屏幕从一个点快速滑动到另一个点
+        :param direction: 滑动方向，默认向下，左l，右r，上u
+        :return:
+        """
+        size = self.driver.get_window_size()
+        width = size['width']
+        height = size['height']
+        x_c = width * 0.5
+        x_l = width * 0.2
+        x_r = width * 0.8
+        y_c = height * 0.5
+        y_d = height * 0.8
+        y_u = height * 0.2
+        if direction == 'd':
+            self.swipe(x_c, y_c, x_c, y_d)
+        elif direction == 'u':
+            self.swipe(x_c, y_c, x_c, y_u)
+        elif direction == 'l':
+            self.swipe(x_c, y_c, x_l, y_c)
+        else:
+            self.swipe(x_c, y_c, x_r, y_c)
+
+
 
 
 if __name__ == '__main__':

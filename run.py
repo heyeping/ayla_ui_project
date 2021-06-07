@@ -9,7 +9,7 @@ import pytest,os
 if __name__ == "__main__":
     base_url = os.getcwd()
     #print(base_url)
-    runTestFile = os.path.join(base_url, 'Projects/AndroidConstructionAPP', 'Cases/Test_ProjectPage.py')
+    runTestFile = os.path.join(base_url, 'Projects/AndroidConstructionAPP', 'Cases/Test_Smoke.py')
     #print(runTestFile)
     reportFile = os.path.join(base_url, 'Report')
     pytest.main(["-vs", runTestFile, f'--alluredir={reportFile}/data'])

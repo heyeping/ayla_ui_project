@@ -6,7 +6,7 @@
 
 from BaseDriver.Driver import AutoDriver
 from Projects.AndroidConstructionAPP.Pages.ProjectPage import ProjectPage
-from Projects.AndroidConstructionAPP.Pages.DevicesPage import DevicesPage
+from Projects.AndroidConstructionAPP.Pages.DevicePage import DevicePage
 from Projects.AndroidConstructionAPP.Config.Config import *
 import pytest,allure
 import time, random

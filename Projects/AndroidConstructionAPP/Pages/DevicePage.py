@@ -4,7 +4,7 @@ import unittest, time
 from Projects.AndroidConstructionAPP.Pages.ProjectPage import ProjectPage
 from Projects.AndroidConstructionAPP.Pages.RoomPage import RoomPage
 
-class DevicesPage(ElementLoader, unittest.TestCase):
+class DevicePage(ElementLoader):
     driver = AutoDriver()
     #ElementLoader = ElementLoader()
     ProjectPage = ProjectPage()
@@ -24,9 +24,19 @@ class DevicesPage(ElementLoader, unittest.TestCase):
         self.ProjectPage.intoProjectInfo()
         #进入设备列表页面
         self.RoomPage.into_rommPage()
+        devicePage_btn = self.driver.find_element_until_visibility(self.locator("device_page"))
+        self.driver.click(devicePage_btn)
 
     def back(self):
         self.driver.click_device_btn(4)
+
+    def is_in_devicePage(self):
+        """
+        判断是否在device页面
+        :return:
+        """
+        flag = self.driver.is_element(self.locator("device_page"))
+        return flag
 
     def get_device_name(self, num=0):
         """
@@ -63,6 +73,42 @@ class DevicesPage(ElementLoader, unittest.TestCase):
         self.driver.send_keys(roomName_text, roomName)
         done_btn = self.driver.find_element_until_visibility(self.locator("done_btn"))
         self.driver.click(done_btn)
+
+    def into_room_more(self):
+        """
+        进入房间更多页
+        :return:
+        """
+        roomMore_btn = self.driver.find_element_until_visibility(self.locator("room_more_btn"))
+        self.driver.click(roomMore_btn)
+        # flag = self.is_in_devicePage()
+        # if flag:
+        #
+        # else:
+        #     return "not in devicePage"
+
+    def is_in_roomMorePage(self):
+        """
+        判断是否在房间更多页
+        :return:
+        """
+        flag = self.driver.is_element(self.locator("room_name_btn"))
+        return flag
+
+    def del_room(self):
+        """
+        删除房间
+        :return:
+        """
+        flag = self.is_in_roomMorePage()
+        if flag:
+            remove_btn = self.driver.find_element_until_visibility(self.locator("btn_remove_room"))
+            self.driver.click(remove_btn)
+            v_done = self.driver.find_element_until_visibility(self.locator("done_btn"))
+            self.driver.click(v_done)
+        else:
+            return "not in roomMorePage"
+
 
     def into_deviceMore_page(self, num=0):
         """
@@ -122,6 +168,15 @@ class DevicesPage(ElementLoader, unittest.TestCase):
         self.driver.send_keys(region_name_text, name)
         done_btn = self.driver.find_element_until_visibility(self.locator("done_btn"))
         self.driver.click(done_btn)
+
+    # 以下用于toast验证
+    def remove_toast(self):
+        """
+        移除成功
+        :return:
+        """
+        toast = self.driver.get_toast("移除成功").text
+        return toast
 
 
 

@@ -1,8 +1,9 @@
 from BaseDriver.Driver import AutoDriver
 from Helper.ElementLoader import ElementLoader
 import unittest, time
+from loguru import logger
 
-class ProjectPage(ElementLoader, unittest.TestCase):
+class ProjectPage(ElementLoader):
     driver = AutoDriver()
 
     def __init__(self):
@@ -10,9 +11,9 @@ class ProjectPage(ElementLoader, unittest.TestCase):
 
     def is_project_page(self):
         """用于判断是不是在项目页面，是返回True，不是返回False"""
-        print("进入校验")
+        #print("进入校验")
         flag = self.driver.is_element(self.locator("project_page_title"), 3)
-        print(flag)
+        #print(flag)
         return flag
 
     def get_project_name(self, num=0):
@@ -60,13 +61,30 @@ class ProjectPage(ElementLoader, unittest.TestCase):
         save = self.driver.find_element_until_visibility(self.locator("project_save_btn"))
         self.driver.click(save)
 
-    def intoProjectInfo(self):
+    def intoProjectInfo(self, num=0):
         """进入项目详情页面"""
         #project_class = "android.widget.TextView"
         #project_btn = self.driver.get_text_ele(project_class, "验证导入")
-        project_btn = self.driver.find_element_until_visibility(self.locator("project_btn"))
+        project_btn = self.driver.find_elements_until_visibility(self.locator("project_type"))
         time.sleep(1)
-        self.driver.click(project_btn)
+        self.driver.click(project_btn[num])
+
+    def projectTypeFlag(self, num=0):
+        """
+        判断项目类型，type为正式的，不能操作删除
+        :param num: 默认为第一个
+        :return:
+        """
+        type_flag = False
+        flag = self.driver.is_element(self.locator("project_name"))
+        if flag:
+            types = self.driver.find_elements_until_visibility(self.locator("project_type_1"))
+            type_text = types[num].text
+            if type_text != "正式":
+                type_flag = True
+        else:
+            logger.info("暂无项目")
+        return type_flag
 
 
 

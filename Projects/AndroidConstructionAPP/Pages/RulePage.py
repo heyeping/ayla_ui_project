@@ -4,7 +4,7 @@ import unittest, time
 from Projects.AndroidConstructionAPP.Pages.ProjectPage import ProjectPage
 from Projects.AndroidConstructionAPP.Pages.RoomPage import RoomPage
 
-class RulePage(ElementLoader, unittest.TestCase):
+class RulePage(ElementLoader):
     driver = AutoDriver()
     ProjectPage = ProjectPage()
     RoomPage = RoomPage()

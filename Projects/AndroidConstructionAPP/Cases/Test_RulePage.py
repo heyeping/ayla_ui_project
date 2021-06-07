@@ -10,7 +10,7 @@ from Projects.AndroidConstructionAPP.Config.Config import *
 import unittest
 import time,random
 
-class Test_RulePage(unittest.TestCase):
+class Test_RulePage():
     driver = AutoDriver()
     RulePage = RulePage()
     RulePage.into_rulePage()

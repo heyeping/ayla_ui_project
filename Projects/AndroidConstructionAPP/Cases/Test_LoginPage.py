@@ -38,7 +38,7 @@ class Test_LoginPage():
         time.sleep(2)
         actual_toast = self.LoginPage.account_null_toast()
         print("实际的toast为",actual_toast)
-        assert actual_toast == expected_toast, "验证码校验有问题，期望: %s, 实际: %s" % (expected_toast, actual_toast)
+        assert actual_toast == expected_toast, "验证结果，期望: %s, 实际: %s" % (expected_toast, actual_toast)
 
     def test_02_login(self):
         """密码为空"""
@@ -48,7 +48,7 @@ class Test_LoginPage():
         time.sleep(2)
         actual_toast = self.LoginPage.password_null_toast()
         print("实际的toast为", actual_toast)
-        assert actual_toast == expected_toast, "验证码校验有问题，期望: %s, 实际: %s" % (expected_toast, actual_toast)
+        assert actual_toast == expected_toast, "验证结果，期望: %s, 实际: %s" % (expected_toast, actual_toast)
 
     def test_03_login(self):
         """错误的账号"""
@@ -59,7 +59,7 @@ class Test_LoginPage():
         time.sleep(2)
         actual_toast = self.LoginPage.account_error_toast()
         print("实际的toast为", actual_toast)
-        assert actual_toast == expected_toast, "验证码校验有问题，期望: %s, 实际: %s" % (expected_toast, actual_toast)
+        assert actual_toast == expected_toast, "验证结果，期望: %s, 实际: %s" % (expected_toast, actual_toast)
 
     def test_04_login(self):
         """错误的密码"""
@@ -70,7 +70,7 @@ class Test_LoginPage():
         time.sleep(2)
         actual_toast = self.LoginPage.password_error_toast()
         print("实际的toast为", actual_toast)
-        assert actual_toast == expected_toast, "验证码校验有问题，期望: %s, 实际: %s" % (expected_toast, actual_toast)
+        assert actual_toast == expected_toast, "验证结果，期望: %s, 实际: %s" % (expected_toast, actual_toast)
 
     def test_05_register(self):
         """
@@ -84,7 +84,7 @@ class Test_LoginPage():
         print("实际的toast为", actual_toast)
         time.sleep(2)
         self.LoginPage.back_login_page()
-        assert actual_toast == expected_toast, "验证码校验有问题，期望: %s, 实际: %s" % (expected_toast, actual_toast)
+        assert actual_toast == expected_toast, "验证结果，期望: %s, 实际: %s" % (expected_toast, actual_toast)
 
     def test_06_register(self):
         """
@@ -98,7 +98,7 @@ class Test_LoginPage():
         print("实际的toast为", actual_toast)
         time.sleep(2)
         self.LoginPage.back_login_page()
-        assert actual_toast == expected_toast, "验证码校验有问题，期望: %s, 实际: %s" % (expected_toast, actual_toast)
+        assert actual_toast == expected_toast, "验证结果，期望: %s, 实际: %s" % (expected_toast, actual_toast)
 
     def test_07_register(self):
         """
@@ -112,7 +112,7 @@ class Test_LoginPage():
         print("实际的toast为", actual_toast)
         time.sleep(2)
         self.LoginPage.back_login_page()
-        assert actual_toast == expected_toast, "验证码校验有问题，期望: %s, 实际: %s" % (expected_toast, actual_toast)
+        assert actual_toast == expected_toast, "验证结果，期望: %s, 实际: %s" % (expected_toast, actual_toast)
 
     def test_08_register(self):
         """注册成功"""
@@ -123,7 +123,7 @@ class Test_LoginPage():
         time.sleep(4)
         actual_toast = self.LoginPage.register_succ_toast()
         print("实际的toast为", actual_toast)
-        assert actual_toast == expected_toast, "验证码校验有问题，期望: %s, 实际: %s" % (expected_toast, actual_toast)
+        assert actual_toast == expected_toast, "验证结果，期望: %s, 实际: %s" % (expected_toast, actual_toast)
 
     def test_09_login(self):
         """登录成功"""

@@ -16,8 +16,8 @@ class RoomPage(ElementLoader, unittest.TestCase):
         """进入房间页面"""
         #room_class = "android.widget.RelativeLayout"
         #room_btn = self.driver.get_text_ele(room_class,"多个本地延时QQ")
-        room_btn = self.driver.find_element_until_visibility(self.locator("room_btn"))
-        self.driver.click(room_btn)
+        room_btn = self.driver.find_elements_until_visibility(self.locator("room_name"))
+        self.driver.click(room_btn[1])
 
     def get_room_name(self, num = 0):
         """
