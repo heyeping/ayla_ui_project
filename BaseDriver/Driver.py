@@ -774,10 +774,12 @@ class AutoDriver(Singleton):
         :param img_doc: 截图说明
         :return:
         """
-        base_url = os.getcwd()
+        base_url = os.path.realpath(os.path.dirname(os.path.dirname(__file__)))
         file_time = time.strftime('%Y%m%d%H%M', time.localtime(time.time()))
-        file_name = base_url + str(file_time) + '.png'
-        self.driver.save_screenshot(file_name)
+        #file_name = base_url + str(file_time) + '.png'
+        #self.driver.save_screenshot(file_name)
+        file_name = f'{base_url}/Report/screen/{str(file_time)}.png'
+        self.driver.get_screenshot_as_file(file_name)
         with open(file_name, mode="rb") as f:
             file = f.read()
         return file

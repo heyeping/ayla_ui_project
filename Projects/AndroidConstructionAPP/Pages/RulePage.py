@@ -193,12 +193,21 @@ class RulePage(ElementLoader):
 
     def into_auto_rule(self, num=0):
         """
-        进入原有的联动编辑页
+        进入原有的联动（云端+本地）编辑页
         :param num: 默认第一个
         :return:
         """
         rules = self.driver.find_elements_until_visibility(self.locator("device_names"))
         self.driver.click(rules[num])
+
+    def into_oneKey_rule(self, num=0):
+        """
+        进入原有的一键联动编辑页
+        :param num: 默认第一个
+        :return:
+        """
+        edit_btn = self.driver.find_elements_until_visibility(self.locator("edit_onekey_btn"))
+        self.driver.click(edit_btn[num])
 
     def del_rule(self):
         """

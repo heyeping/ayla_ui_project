@@ -30,6 +30,12 @@ class DevicePage(ElementLoader):
     def back(self):
         self.driver.click_device_btn(4)
 
+    def get_roomName(self):
+        """获取当前房间name"""
+        roomName_btn = self.driver.find_element_until_visibility(self.locator("roomName"))
+        roomName = roomName_btn.text
+        return roomName
+
     def is_in_devicePage(self):
         """
         判断是否在device页面
@@ -116,8 +122,14 @@ class DevicePage(ElementLoader):
         :param num: 默认第一个设备
         :return:
         """
-        device_names = self.driver.find_element_until_visibility(self.locator("device_name"))
+        device_names = self.driver.find_elements_until_visibility(self.locator("device_name"))
         self.driver.click(device_names[num])
+        #time.sleep(2)
+        #尝试切换context，用class_name不行，不切context使用原生的xpath可以，前提是包要确保需要开启webview远程调试功能：this.appView.setWebContentsDebuggingEnabled(true);
+        #context = self.driver.get_all_contexts()
+        #self.driver.switch_to_context("WEBVIEW_com.ayla.hotelsaas")
+        #return context
+        #判断当前是否存在设备更多页，false则是进入单控页
         flag = self.driver.is_element(self.locator("device_more_title"))
         if flag:
             print("已进入设备更多页")
@@ -131,11 +143,11 @@ class DevicePage(ElementLoader):
         :param name:
         :return:
         """
-        self.into_deviceMore_page(0)
+        #self.into_deviceMore_page(0)
         device_name_btn = self.driver.find_element_until_visibility(self.locator("device_name"))
         self.driver.click(device_name_btn)
         device_name_text = self.driver.find_element_until_visibility(self.locator("name_text"))
-        self.driver.send_keys(device_name_btn, name)
+        self.driver.send_keys(device_name_text, name)
         done_btn = self.driver.find_element_until_visibility(self.locator("done_btn"))
         self.driver.click(done_btn)
 
@@ -169,6 +181,14 @@ class DevicePage(ElementLoader):
         done_btn = self.driver.find_element_until_visibility(self.locator("done_btn"))
         self.driver.click(done_btn)
 
+    def go_back(self):
+        """
+        返回操作
+        :return:
+        """
+        iv_left = self.driver.find_element_until_visibility(self.locator("iv_left"))
+        self.driver.click(iv_left)
+
     # 以下用于toast验证
     def remove_toast(self):
         """
@@ -177,6 +197,13 @@ class DevicePage(ElementLoader):
         """
         toast = self.driver.get_toast("移除成功").text
         return toast
+
+    def sucess_toast(self):
+        """
+        修改成功
+        :return:
+        """
+        toast = self.driver.get_toast("修改成功").text
 
 
 

@@ -30,7 +30,7 @@ class TestSmoke():
     @pytest.mark.skip(reason='skip testing this')
     @allure.feature("登录模块")
     @allure.story("登录--正向用例")
-    @allure.title("登录场景测试")
+    @allure.title("登录测试")
     def test_01_login(self):
         """
         用例描述：
@@ -50,10 +50,9 @@ class TestSmoke():
         flag_assert = self.ProjectPage.is_project_page()
         assert flag_assert, '登录失败'
 
-
     @allure.feature("项目管理模块")
     @allure.story("新建项目--正向用例")
-    @allure.title("新建项目场景测试")
+    @allure.title("新建项目测试")
     def test_02_addProject(self):
         """
         用例描述：
@@ -78,7 +77,7 @@ class TestSmoke():
 
     @allure.feature("项目管理模块")
     @allure.story("删除项目--正向用例")
-    @allure.title("删除项目场景测试")
+    @allure.title("删除项目测试")
     def test_03_removeProject(self):
         """
         用例描述：
@@ -95,8 +94,8 @@ class TestSmoke():
 
     @allure.feature("房间管理模块")
     @allure.story("修改房间名称--正向用例")
-    @allure.title("修改房间名称场景测试")
-    def test_03_changeRoomName(self):
+    @allure.title("修改房间名称测试")
+    def test_04_changeRoomName(self):
         """
         用例描述：
         测试点：修改房间名称
@@ -104,12 +103,21 @@ class TestSmoke():
         校验：1、获取修改后的房间title，与修改的name作校验
         :return:
         """
-        pass
+        #进入设备列表页面
+        self.DevicePage.into_devicePage()
+        #进入房间更多页
+        self.DevicePage.into_room_more()
+        NewName = str(random.randint(0,99)) + "楼_" + "房间_" + str(random.randint(0,99))
+        self.DevicePage.set_room_name(NewName)
+        #返回设备列表页面，获取其房间名称
+        self.DevicePage.go_back()
+        actual_name = self.DevicePage.get_roomName()
+        assert actual_name == NewName, "修改房间名称失败，期望：%s, 实际：%s" % (NewName, actual_name)
 
     @allure.feature("设备管理模块")
     @allure.story("修改设备名称--正向用例")
-    @allure.title("修改设备名称场景测试")
-    def test_03_changeDeviceName(self):
+    @allure.title("修改设备名称测试")
+    def test_05_changeDeviceName(self):
         """
         用例描述：
         测试点：修改设备名称
@@ -117,15 +125,60 @@ class TestSmoke():
         校验：1、获取修改后的设备name，与修改的name作校验
         :return:
         """
-        pass
+        #进入设备列表页面
+        self.DevicePage.into_devicePage()
+        #选择第一个设备进入设备更多页
+        con = self.DevicePage.into_deviceMore_page()
+        print(con)
+        NewName = "米兰_" + str(random.randint(0,99)) + "_设备_" + str(random.randint(0,99))
+        self.DevicePage.set_device_name(NewName)
+        #actual_toast = self.DevicePage.sucess_toast()
+        self.DevicePage.back()
+        actual_name = self.DevicePage.get_device_name()
+        assert actual_name == NewName
 
+    @allure.feature("设备管理模块")
+    @allure.story("修改设备开关名称--正向用例")
+    @allure.title("修改设备开关名称测试")
+    def test_06_changeOnOffName(self):
+        """
+        用例描述：
+        测试点：修改设备开关名称
+        用例步骤：1、选择某个设备进入更多页，操作开关重命名修改
+        校验：1、获取修改后的设备开关name，与修改的name作校验
+        :return:
+        """
+
+    @allure.feature("设备管理模块")
+    @allure.story("修改设备位置--正向用例")
+    @allure.title("修改设备位置测试")
+    def test_07_changeDeviceName(self):
+        """
+        用例描述：
+        测试点：修改设备位置
+        用例步骤：1、选择某个设备进入更多页，操作设备位置修改
+        校验：1、获取修改后的设备位置，与修改的位置作校验/获取toast
+        :return:
+        """
+
+    @allure.feature("设备管理模块")
+    @allure.story("修改设备点位--正向用例")
+    @allure.title("修改设备点位测试")
+    def test_08_changeDeviceName(self):
+        """
+        用例描述：
+        测试点：修改设备点位
+        用例步骤：1、选择某个设备进入更多页，操作设备点位修改
+        校验：1、获取修改后的点位，与修改的点位作校验
+        :return:
+        """
 
 
     @pytest.mark.skip(reason='skip testing this')
     @allure.feature("联动管理模块")
     @allure.story("新建联动--正向用例")
     @allure.title("新建一键联动测试")
-    def test_04_add_oneKeyRule(self):
+    def test_09_add_oneKeyRule(self):
         """
         用例描述：
         测试点：新建一键联动
@@ -145,9 +198,39 @@ class TestSmoke():
         assert actual_name == rule_name, "新建一键联动失败, 期望: %s, 实际: %s" % (rule_name, actual_name)
 
     @allure.feature("联动管理模块")
+    @allure.story("编辑联动--正向用例")
+    @allure.title("编辑一键联动测试")
+    def test_10_edit_oneKeyRule(self):
+        """
+        用例描述：
+        测试点：编辑一键联动
+        用例步骤：1、编辑一键联动：名称及条件动作
+        校验：1、拿到最新一键联动的名称与创建的名称做比较
+        :return:
+        """
+        self.RulePage.into_rulePage()
+        rule_name = "修改" + str(random.randint(0,99)) + "_" + "一键" + str(random.randint(0,99))
+        self.RulePage.into_oneKey_page()
+        self.RulePage.into_oneKey_rule()
+        self.RulePage.set_rule_name(rule_name)
+
+
+    @allure.feature("联动管理模块")
+    @allure.story("删除联动--正向用例")
+    @allure.title("删除一键联动测试")
+    def test_09_del_oneKeyRule(self):
+        """
+        用例描述：
+        测试点：删除一键联动
+        用例步骤：1、删除一键联动
+        校验：1、toast校验
+        :return:
+        """
+
+    @allure.feature("联动管理模块")
     @allure.story("新建联动--正向用例")
     @allure.title("新建云端联动测试")
-    def test_02_add_autoCloudRule(self):
+    def test_10_add_autoCloudRule(self):
         """
         用例描述：
         测试点：新建云端联动
@@ -164,4 +247,52 @@ class TestSmoke():
         self.RulePage.save_rule()
         actual_name = self.RulePage.get_rule_name()
         assert actual_name == rule_name, "新建云端自动化联动失败, 期望: %s, 实际: %s" % (rule_name, actual_name)
+
+    @allure.feature("联动管理模块")
+    @allure.story("编辑联动--正向用例")
+    @allure.title("编辑云端联动测试")
+    def test_10_edit_autoCloudRule(self):
+        """
+        用例描述：
+        测试点：编辑云端联动
+        用例步骤：1、拿到最新建的云端联动，进行编辑：联动名称、动作、条件
+        校验：1、拿到最新联动的名称与创建的名称做校验
+        :return:
+        """
+
+    @allure.feature("联动管理模块")
+    @allure.story("删除联动--正向用例")
+    @allure.title("删除云端联动测试")
+    def test_09_del_autoCloudRule(self):
+        """
+        用例描述：
+        测试点：删除云端联动
+        用例步骤：1、删除云端联动
+        校验：1、toast校验
+        :return:
+        """
+
+    @allure.feature("联动管理模块")
+    @allure.story("新建联动--正向用例")
+    @allure.title("新建罗马本地联动测试")
+    def test_10_add_autoAylaLocalRule(self):
+        """
+        用例描述：
+        测试点：新建罗马本地联动
+        用例步骤：1、新建罗马本地联动
+        校验：1、拿到最新联动的名称与创建的名称做校验
+        :return:
+        """
+
+    @allure.feature("联动管理模块")
+    @allure.story("新建联动--正向用例")
+    @allure.title("新建米兰本地联动测试")
+    def test_10_add_autoAliLocalRule(self):
+        """
+        用例描述：
+        测试点：新建米兰本地联动
+        用例步骤：1、新建米兰本地联动
+        校验：1、拿到最新联动的名称与创建的名称做校验
+        :return:
+        """
 
