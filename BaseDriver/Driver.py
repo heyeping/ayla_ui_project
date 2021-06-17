@@ -309,7 +309,7 @@ class AutoDriver(Singleton):
         # end_x：滑动终点横坐标
         # end_y：滑动终点纵坐标
         # dur：在多少时间内完成滑动动作（单位：ms毫秒）
-        return self.driver.swipe(start_x=start_x, start_y=start_y, end_x=end_x, end_y=end_y, duration=dur)
+        self.driver.swipe(start_x=start_x, start_y=start_y, end_x=end_x, end_y=end_y, duration=dur)
 
     @classmethod
     def restart_app(self):
@@ -766,7 +766,7 @@ class AutoDriver(Singleton):
             except NoSuchElementException:
                 #操作上滑
                 self.swipe(screen_width*0.5, screen_height*0.9, screen_width*0.5, screen_height*0.2, 1000)
-        return ele_find
+        #return ele_find
 
     def save_screenshot(self):
         """
@@ -789,10 +789,10 @@ class AutoDriver(Singleton):
         获取屏幕宽高
         :return:
         """
-        x = self.driver.get_window_size()['width']
-        y = self.driver.get_window_size()['height']
-        return (x, y)
+        size = self.driver.get_window_size()
+        return size
 
+    @classmethod
     def swipe_control(self, direction = 'd'):
         """
         滑动，根据传入的参数控制滑动的方向：
@@ -811,13 +811,13 @@ class AutoDriver(Singleton):
         y_d = height * 0.8
         y_u = height * 0.2
         if direction == 'd':
-            self.swipe(x_c, y_c, x_c, y_d)
+            self.driver.swipe(x_c, y_c, x_c, y_d)
         elif direction == 'u':
-            self.swipe(x_c, y_c, x_c, y_u)
+            self.driver.swipe(x_c, y_c, x_c, y_u)
         elif direction == 'l':
-            self.swipe(x_c, y_c, x_l, y_c)
+            self.driver.swipe(x_c, y_c, x_l, y_c)
         else:
-            self.swipe(x_c, y_c, x_r, y_c)
+            self.driver.swipe(x_c, y_c, x_r, y_c)
 
 
 

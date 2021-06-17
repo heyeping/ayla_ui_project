@@ -128,8 +128,7 @@ class TestSmoke():
         #进入设备列表页面
         self.DevicePage.into_devicePage()
         #选择第一个设备进入设备更多页
-        con = self.DevicePage.into_deviceMore_page()
-        print(con)
+        self.DevicePage.into_deviceMore_page()
         NewName = "米兰_" + str(random.randint(0,99)) + "_设备_" + str(random.randint(0,99))
         self.DevicePage.set_device_name(NewName)
         #actual_toast = self.DevicePage.sucess_toast()
@@ -148,11 +147,22 @@ class TestSmoke():
         校验：1、获取修改后的设备开关name，与修改的name作校验
         :return:
         """
+        #进入设备列表页面
+        self.DevicePage.into_devicePage()
+        #选择第一个设备进入设备更多页
+        self.DevicePage.into_deviceMore_page()
+        NewName = "修改的" + str(random.randint(0,99)) + "_开关" + str(random.randint(0,99))
+        self.DevicePage.set_device_function_name(NewName)
+        actual_toast = self.DevicePage.sucess_toast()
+        assert actual_toast == "修改成功"
+        #回到设备更多页
+        self.DevicePage.back()
+
 
     @allure.feature("设备管理模块")
     @allure.story("修改设备位置--正向用例")
     @allure.title("修改设备位置测试")
-    def test_07_changeDeviceName(self):
+    def test_07_changeDeviceLocation(self):
         """
         用例描述：
         测试点：修改设备位置
@@ -160,11 +170,20 @@ class TestSmoke():
         校验：1、获取修改后的设备位置，与修改的位置作校验/获取toast
         :return:
         """
+        # 进入设备列表页面
+        self.DevicePage.into_devicePage()
+        # 选择第一个设备进入设备更多页
+        self.DevicePage.into_deviceMore_page()
+        self.DevicePage.set_device_location()
+        actual_toast = self.DevicePage.sucess_toast()
+        assert actual_toast == "修改成功"
+        # 回到设备更多页
+        self.DevicePage.back()
 
     @allure.feature("设备管理模块")
     @allure.story("修改设备点位--正向用例")
     @allure.title("修改设备点位测试")
-    def test_08_changeDeviceName(self):
+    def test_08_changeDevicePoint(self):
         """
         用例描述：
         测试点：修改设备点位
@@ -172,9 +191,18 @@ class TestSmoke():
         校验：1、获取修改后的点位，与修改的点位作校验
         :return:
         """
+        # 进入设备列表页面
+        self.DevicePage.into_devicePage()
+        # 选择第一个设备进入设备更多页
+        self.DevicePage.into_deviceMore_page()
+        NewName = str(random.randint(0,99)) + "楼_" + str(random.randint(0,99)) + "房间"
+        self.DevicePage.set_device_pointName(NewName)
+        actual_toast = self.DevicePage.sucess_toast()
+        assert actual_toast == "修改成功"
+        # 回到设备更多页
+        self.DevicePage.back()
 
-
-    @pytest.mark.skip(reason='skip testing this')
+    #@pytest.mark.skip(reason='skip testing this')
     @allure.feature("联动管理模块")
     @allure.story("新建联动--正向用例")
     @allure.title("新建一键联动测试")
@@ -192,7 +220,7 @@ class TestSmoke():
         self.RulePage.into_cloud_rule()
         self.RulePage.set_rule_name(rule_name)
         self.RulePage.add_one_key_type()
-        self.RulePage.add_actionOrCondition(0,0,0,1,1)
+        self.RulePage.add_actionOrCondition("cloud",0,0,0,1,1)
         self.RulePage.save_rule()
         actual_name = self.RulePage.get_rule_name()
         assert actual_name == rule_name, "新建一键联动失败, 期望: %s, 实际: %s" % (rule_name, actual_name)
@@ -213,12 +241,16 @@ class TestSmoke():
         self.RulePage.into_oneKey_page()
         self.RulePage.into_oneKey_rule()
         self.RulePage.set_rule_name(rule_name)
+        self.RulePage.add_actionOrCondition("cloud",1,0,0,1,1)
+        self.RulePage.save_rule()
+        actual_name = self.RulePage.get_rule_name()
+        assert actual_name == rule_name
 
 
     @allure.feature("联动管理模块")
     @allure.story("删除联动--正向用例")
     @allure.title("删除一键联动测试")
-    def test_09_del_oneKeyRule(self):
+    def test_11_del_oneKeyRule(self):
         """
         用例描述：
         测试点：删除一键联动
@@ -226,11 +258,18 @@ class TestSmoke():
         校验：1、toast校验
         :return:
         """
+        self.RulePage.into_rulePage()
+        self.RulePage.into_oneKey_page()
+        self.RulePage.into_oneKey_rule()
+        self.RulePage.del_rule()
+        actual_toast = self.RulePage.remove_toast()
+        assert actual_toast == "删除成功"
+
 
     @allure.feature("联动管理模块")
     @allure.story("新建联动--正向用例")
     @allure.title("新建云端联动测试")
-    def test_10_add_autoCloudRule(self):
+    def test_12_add_autoCloudRule(self):
         """
         用例描述：
         测试点：新建云端联动
@@ -242,8 +281,8 @@ class TestSmoke():
         self.RulePage.into_autoRule_page()
         self.RulePage.into_cloud_rule()
         self.RulePage.set_rule_name(rule_name)
-        self.RulePage.add_actionOrCondition(0,0,0,0,1)
-        self.RulePage.add_actionOrCondition(4,0,0,1,1)
+        self.RulePage.add_actionOrCondition("cloud",0,0,0,0,1)
+        self.RulePage.add_actionOrCondition("cloud",1,0,0,1,1)
         self.RulePage.save_rule()
         actual_name = self.RulePage.get_rule_name()
         assert actual_name == rule_name, "新建云端自动化联动失败, 期望: %s, 实际: %s" % (rule_name, actual_name)
@@ -251,7 +290,7 @@ class TestSmoke():
     @allure.feature("联动管理模块")
     @allure.story("编辑联动--正向用例")
     @allure.title("编辑云端联动测试")
-    def test_10_edit_autoCloudRule(self):
+    def test_13_edit_autoCloudRule(self):
         """
         用例描述：
         测试点：编辑云端联动
@@ -259,11 +298,18 @@ class TestSmoke():
         校验：1、拿到最新联动的名称与创建的名称做校验
         :return:
         """
+        rule_name = "修改" + str(random.randint(0,99)) + "_" + "云端" + str(random.randint(0,99))
+        self.RulePage.into_auto_rule()
+        self.RulePage.set_rule_name(rule_name)
+        self.RulePage.add_actionOrCondition("cloud",0,0,1,0,1)
+        self.RulePage.save_rule()
+        actual_name = self.RulePage.get_rule_name()
+        assert actual_name == rule_name
 
     @allure.feature("联动管理模块")
     @allure.story("删除联动--正向用例")
     @allure.title("删除云端联动测试")
-    def test_09_del_autoCloudRule(self):
+    def test_14_del_autoCloudRule(self):
         """
         用例描述：
         测试点：删除云端联动
@@ -271,11 +317,77 @@ class TestSmoke():
         校验：1、toast校验
         :return:
         """
+        self.RulePage.into_rulePage()
+        self.RulePage.into_autoRule_page()
+        self.RulePage.into_auto_rule()
+        self.RulePage.del_rule()
+        actual_toast = self.RulePage.remove_toast()
+        assert actual_toast == "删除成功"
+
+    @allure.feature("联动管理模块")
+    @allure.story("新建联动--正向用例")
+    @allure.title("新建A2本地联动测试")
+    def test_15_add_autoA2LocalRule(self):
+        """
+        用例描述：
+        测试点：新建A2本地联动
+        用例步骤：1、新建A2本地联动
+        校验：1、拿到最新联动的名称与创建的名称做校验
+        :return:
+        """
+        rule_name = "新建" + str(random.randint(0,99)) + "_A2本地_" + str(random.randint(0,99))
+        self.RulePage.into_rulePage()
+        self.RulePage.into_autoRule_page()
+        self.RulePage.into_select_local_rule("A2")
+        self.RulePage.set_rule_name(rule_name)
+        self.RulePage.add_actionOrCondition("A2",0,0,0,0,1)
+        self.RulePage.add_actionOrCondition("A2",0,0,1,1,1)
+        self.RulePage.save_rule()
+        actual_name = self.RulePage.get_rule_name()
+        assert actual_name == rule_name
+
+    @allure.feature("联动管理模块")
+    @allure.story("编辑联动--正向用例")
+    @allure.title("编辑A2本地联动测试")
+    def test_16_edit_autoA2LocalRule(self):
+        """
+        用例描述：
+        测试点：编辑A2本地联动
+        用例步骤：1、编辑A2本地联动
+        校验：1、拿到最新联动的名称与创建的名称做校验
+        :return:
+        """
+        rule_name = "修改" + str(random.randint(0, 99)) + "_" + "A2本地" + str(random.randint(0, 99))
+        self.RulePage.into_rulePage()
+        self.RulePage.into_autoRule_page()
+        self.RulePage.into_auto_rule()
+        self.RulePage.set_rule_name(rule_name)
+        self.RulePage.save_rule()
+        actual_name = self.RulePage.get_rule_name()
+        assert actual_name == rule_name
+
+    @allure.feature("联动管理模块")
+    @allure.story("删除联动--正向用例")
+    @allure.title("删除A2本地联动测试")
+    def test_17_del_autoA2LocalRule(self):
+        """
+        用例描述：
+        测试点：删除A2本地联动
+        用例步骤：1、删除A2本地联动
+        校验：1、获取toast提示
+        :return:
+        """
+        self.RulePage.into_rulePage()
+        self.RulePage.into_autoRule_page()
+        self.RulePage.into_auto_rule()
+        self.RulePage.del_rule()
+        actual_toast = self.RulePage.remove_toast()
+        assert actual_toast == "删除成功"
 
     @allure.feature("联动管理模块")
     @allure.story("新建联动--正向用例")
     @allure.title("新建罗马本地联动测试")
-    def test_10_add_autoAylaLocalRule(self):
+    def test_18_add_autoAylaLocalRule(self):
         """
         用例描述：
         测试点：新建罗马本地联动
@@ -283,11 +395,59 @@ class TestSmoke():
         校验：1、拿到最新联动的名称与创建的名称做校验
         :return:
         """
+        rule_name = "新建" + str(random.randint(0, 99)) + "_罗马本地_" + str(random.randint(0, 99))
+        self.RulePage.into_rulePage()
+        self.RulePage.into_autoRule_page()
+        self.RulePage.into_select_local_rule("ayla")
+        self.RulePage.set_rule_name(rule_name)
+        self.RulePage.add_actionOrCondition("ayla", 0, 0, 0, 0, 1)
+        self.RulePage.add_actionOrCondition("ayla", 0, 0, 1, 1, 1)
+        self.RulePage.save_rule()
+        actual_name = self.RulePage.get_rule_name()
+        assert actual_name == rule_name
+
+    @allure.feature("联动管理模块")
+    @allure.story("编辑联动--正向用例")
+    @allure.title("编辑罗马本地联动测试")
+    def test_19_edit_autoAylaLocalRule(self):
+        """
+        用例描述：
+        测试点：编辑罗马本地联动
+        用例步骤：1、编辑罗马本地联动
+        校验：1、拿到最新联动的名称与创建的名称做校验
+        :return:
+        """
+        rule_name = "修改" + str(random.randint(0, 99)) + "_" + "罗马本地" + str(random.randint(0, 99))
+        self.RulePage.into_rulePage()
+        self.RulePage.into_autoRule_page()
+        self.RulePage.into_auto_rule()
+        self.RulePage.set_rule_name(rule_name)
+        self.RulePage.save_rule()
+        actual_name = self.RulePage.get_rule_name()
+        assert actual_name == rule_name
+
+    @allure.feature("联动管理模块")
+    @allure.story("删除联动--正向用例")
+    @allure.title("删除罗马本地联动测试")
+    def test_20_del_autoAylaLocalRule(self):
+        """
+        用例描述：
+        测试点：删除罗马本地联动
+        用例步骤：1、删除罗马本地联动
+        校验：1、获取toast提示
+        :return:
+        """
+        self.RulePage.into_rulePage()
+        self.RulePage.into_autoRule_page()
+        self.RulePage.into_auto_rule()
+        self.RulePage.del_rule()
+        actual_toast = self.RulePage.remove_toast()
+        assert actual_toast == "删除成功"
 
     @allure.feature("联动管理模块")
     @allure.story("新建联动--正向用例")
     @allure.title("新建米兰本地联动测试")
-    def test_10_add_autoAliLocalRule(self):
+    def test_21_add_autoAliLocalRule(self):
         """
         用例描述：
         测试点：新建米兰本地联动
@@ -295,4 +455,51 @@ class TestSmoke():
         校验：1、拿到最新联动的名称与创建的名称做校验
         :return:
         """
+        rule_name = "新建" + str(random.randint(0, 99)) + "_米兰本地_" + str(random.randint(0, 99))
+        self.RulePage.into_rulePage()
+        self.RulePage.into_autoRule_page()
+        self.RulePage.into_select_local_rule("ali")
+        self.RulePage.set_rule_name(rule_name)
+        self.RulePage.add_actionOrCondition("ali", 0, 0, 0, 0, 1)
+        self.RulePage.add_actionOrCondition("ali", 0, 0, 1, 1, 1)
+        self.RulePage.save_rule()
+        actual_name = self.RulePage.get_rule_name()
+        assert actual_name == rule_name
 
+    @allure.feature("联动管理模块")
+    @allure.story("编辑联动--正向用例")
+    @allure.title("编辑米兰本地联动测试")
+    def test_22_edit_autoAliLocalRule(self):
+        """
+        用例描述：
+        测试点：编辑米兰本地联动
+        用例步骤：1、编辑米兰本地联动
+        校验：1、拿到最新联动的名称与创建的名称做校验
+        :return:
+        """
+        rule_name = "修改" + str(random.randint(0, 99)) + "_" + "米兰本地" + str(random.randint(0, 99))
+        self.RulePage.into_rulePage()
+        self.RulePage.into_autoRule_page()
+        self.RulePage.into_auto_rule()
+        self.RulePage.set_rule_name(rule_name)
+        self.RulePage.save_rule()
+        actual_name = self.RulePage.get_rule_name()
+        assert actual_name == rule_name
+
+    @allure.feature("联动管理模块")
+    @allure.story("删除联动--正向用例")
+    @allure.title("删除米兰本地联动测试")
+    def test_23_del_autoAliLocalRule(self):
+        """
+        用例描述：
+        测试点：删除米兰本地联动
+        用例步骤：1、删除米兰本地联动
+        校验：1、获取toast提示
+        :return:
+        """
+        self.RulePage.into_rulePage()
+        self.RulePage.into_autoRule_page()
+        self.RulePage.into_auto_rule()
+        self.RulePage.del_rule()
+        actual_toast = self.RulePage.remove_toast()
+        assert actual_toast == "删除成功"

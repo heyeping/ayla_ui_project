@@ -181,6 +181,19 @@ class DevicePage(ElementLoader):
         done_btn = self.driver.find_element_until_visibility(self.locator("done_btn"))
         self.driver.click(done_btn)
 
+    def set_device_location(self, num=0):
+        """
+        设置设备位置
+        :param num: 默认设置第一个
+        :return:
+        """
+        rl_location = self.driver.find_element_until_visibility(self.locator("rl_location"))
+        self.driver.click(rl_location)
+        device_location = self.driver.find_element_until_visibility(self.locator("device_location"))
+        self.driver.click(device_location)
+        device_location_types = self.driver.find_elements_until_visibility(self.locator("device_location_type"))
+        self.driver.click(device_location_types[num])
+
     def go_back(self):
         """
         返回操作
@@ -204,6 +217,7 @@ class DevicePage(ElementLoader):
         :return:
         """
         toast = self.driver.get_toast("修改成功").text
+        return toast
 
 
 
