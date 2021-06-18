@@ -18,9 +18,9 @@ class RulePage(ElementLoader):
         :return:
         """
         # 进入房间列表页面
-        self.ProjectPage.intoProjectInfo()
+        #self.ProjectPage.intoProjectInfo()
         # 进入设备列表页面
-        self.RoomPage.into_rommPage()
+        #self.RoomPage.into_rommPage()
         #进入规则列表页面
         rulePage_btn = self.driver.find_element_until_visibility(self.locator("rule_page"))
         self.driver.click(rulePage_btn)

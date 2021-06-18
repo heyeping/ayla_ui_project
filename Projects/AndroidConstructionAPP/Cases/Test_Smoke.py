@@ -126,7 +126,7 @@ class TestSmoke():
         :return:
         """
         #进入设备列表页面
-        self.DevicePage.into_devicePage()
+        #self.DevicePage.into_devicePage()
         #选择第一个设备进入设备更多页
         self.DevicePage.into_deviceMore_page()
         NewName = "米兰_" + str(random.randint(0,99)) + "_设备_" + str(random.randint(0,99))
@@ -148,7 +148,7 @@ class TestSmoke():
         :return:
         """
         #进入设备列表页面
-        self.DevicePage.into_devicePage()
+        #self.DevicePage.into_devicePage()
         #选择第一个设备进入设备更多页
         self.DevicePage.into_deviceMore_page()
         NewName = "修改的" + str(random.randint(0,99)) + "_开关" + str(random.randint(0,99))
@@ -171,9 +171,9 @@ class TestSmoke():
         :return:
         """
         # 进入设备列表页面
-        self.DevicePage.into_devicePage()
+        #self.DevicePage.into_devicePage()
         # 选择第一个设备进入设备更多页
-        self.DevicePage.into_deviceMore_page()
+        #self.DevicePage.into_deviceMore_page()
         self.DevicePage.set_device_location()
         actual_toast = self.DevicePage.sucess_toast()
         assert actual_toast == "修改成功"
@@ -192,14 +192,18 @@ class TestSmoke():
         :return:
         """
         # 进入设备列表页面
-        self.DevicePage.into_devicePage()
+        #self.DevicePage.into_devicePage()
         # 选择第一个设备进入设备更多页
-        self.DevicePage.into_deviceMore_page()
+        #self.DevicePage.into_deviceMore_page()
         NewName = str(random.randint(0,99)) + "楼_" + str(random.randint(0,99)) + "房间"
         self.DevicePage.set_device_pointName(NewName)
         actual_toast = self.DevicePage.sucess_toast()
         assert actual_toast == "修改成功"
         # 回到设备更多页
+        self.DevicePage.back()
+        # 回到设备单控页
+        self.DevicePage.back()
+        # 回到设备列表页面
         self.DevicePage.back()
 
     #@pytest.mark.skip(reason='skip testing this')
@@ -236,7 +240,7 @@ class TestSmoke():
         校验：1、拿到最新一键联动的名称与创建的名称做比较
         :return:
         """
-        self.RulePage.into_rulePage()
+        #self.RulePage.into_rulePage()
         rule_name = "修改" + str(random.randint(0,99)) + "_" + "一键" + str(random.randint(0,99))
         self.RulePage.into_oneKey_page()
         self.RulePage.into_oneKey_rule()
@@ -258,7 +262,7 @@ class TestSmoke():
         校验：1、toast校验
         :return:
         """
-        self.RulePage.into_rulePage()
+        #self.RulePage.into_rulePage()
         self.RulePage.into_oneKey_page()
         self.RulePage.into_oneKey_rule()
         self.RulePage.del_rule()
@@ -317,7 +321,7 @@ class TestSmoke():
         校验：1、toast校验
         :return:
         """
-        self.RulePage.into_rulePage()
+        #self.RulePage.into_rulePage()
         self.RulePage.into_autoRule_page()
         self.RulePage.into_auto_rule()
         self.RulePage.del_rule()
@@ -336,7 +340,7 @@ class TestSmoke():
         :return:
         """
         rule_name = "新建" + str(random.randint(0,99)) + "_A2本地_" + str(random.randint(0,99))
-        self.RulePage.into_rulePage()
+        #self.RulePage.into_rulePage()
         self.RulePage.into_autoRule_page()
         self.RulePage.into_select_local_rule("A2")
         self.RulePage.set_rule_name(rule_name)
@@ -358,7 +362,7 @@ class TestSmoke():
         :return:
         """
         rule_name = "修改" + str(random.randint(0, 99)) + "_" + "A2本地" + str(random.randint(0, 99))
-        self.RulePage.into_rulePage()
+        #self.RulePage.into_rulePage()
         self.RulePage.into_autoRule_page()
         self.RulePage.into_auto_rule()
         self.RulePage.set_rule_name(rule_name)
@@ -377,13 +381,14 @@ class TestSmoke():
         校验：1、获取toast提示
         :return:
         """
-        self.RulePage.into_rulePage()
+        #self.RulePage.into_rulePage()
         self.RulePage.into_autoRule_page()
         self.RulePage.into_auto_rule()
         self.RulePage.del_rule()
         actual_toast = self.RulePage.remove_toast()
         assert actual_toast == "删除成功"
 
+    @pytest.mark.skip(reason='skip testing this')
     @allure.feature("联动管理模块")
     @allure.story("新建联动--正向用例")
     @allure.title("新建罗马本地联动测试")
@@ -396,7 +401,7 @@ class TestSmoke():
         :return:
         """
         rule_name = "新建" + str(random.randint(0, 99)) + "_罗马本地_" + str(random.randint(0, 99))
-        self.RulePage.into_rulePage()
+        #self.RulePage.into_rulePage()
         self.RulePage.into_autoRule_page()
         self.RulePage.into_select_local_rule("ayla")
         self.RulePage.set_rule_name(rule_name)
@@ -406,6 +411,7 @@ class TestSmoke():
         actual_name = self.RulePage.get_rule_name()
         assert actual_name == rule_name
 
+    @pytest.mark.skip(reason='skip testing this')
     @allure.feature("联动管理模块")
     @allure.story("编辑联动--正向用例")
     @allure.title("编辑罗马本地联动测试")
@@ -418,7 +424,7 @@ class TestSmoke():
         :return:
         """
         rule_name = "修改" + str(random.randint(0, 99)) + "_" + "罗马本地" + str(random.randint(0, 99))
-        self.RulePage.into_rulePage()
+        #self.RulePage.into_rulePage()
         self.RulePage.into_autoRule_page()
         self.RulePage.into_auto_rule()
         self.RulePage.set_rule_name(rule_name)
@@ -426,6 +432,7 @@ class TestSmoke():
         actual_name = self.RulePage.get_rule_name()
         assert actual_name == rule_name
 
+    @pytest.mark.skip(reason='skip testing this')
     @allure.feature("联动管理模块")
     @allure.story("删除联动--正向用例")
     @allure.title("删除罗马本地联动测试")
@@ -437,7 +444,7 @@ class TestSmoke():
         校验：1、获取toast提示
         :return:
         """
-        self.RulePage.into_rulePage()
+        #self.RulePage.into_rulePage()
         self.RulePage.into_autoRule_page()
         self.RulePage.into_auto_rule()
         self.RulePage.del_rule()
@@ -456,12 +463,12 @@ class TestSmoke():
         :return:
         """
         rule_name = "新建" + str(random.randint(0, 99)) + "_米兰本地_" + str(random.randint(0, 99))
-        self.RulePage.into_rulePage()
+        #self.RulePage.into_rulePage()
         self.RulePage.into_autoRule_page()
         self.RulePage.into_select_local_rule("ali")
         self.RulePage.set_rule_name(rule_name)
         self.RulePage.add_actionOrCondition("ali", 0, 0, 0, 0, 1)
-        self.RulePage.add_actionOrCondition("ali", 0, 0, 1, 1, 1)
+        self.RulePage.add_actionOrCondition("ali", 1, 0, 1, 1, 1)
         self.RulePage.save_rule()
         actual_name = self.RulePage.get_rule_name()
         assert actual_name == rule_name
@@ -478,7 +485,7 @@ class TestSmoke():
         :return:
         """
         rule_name = "修改" + str(random.randint(0, 99)) + "_" + "米兰本地" + str(random.randint(0, 99))
-        self.RulePage.into_rulePage()
+        #self.RulePage.into_rulePage()
         self.RulePage.into_autoRule_page()
         self.RulePage.into_auto_rule()
         self.RulePage.set_rule_name(rule_name)
@@ -497,7 +504,7 @@ class TestSmoke():
         校验：1、获取toast提示
         :return:
         """
-        self.RulePage.into_rulePage()
+        #self.RulePage.into_rulePage()
         self.RulePage.into_autoRule_page()
         self.RulePage.into_auto_rule()
         self.RulePage.del_rule()
