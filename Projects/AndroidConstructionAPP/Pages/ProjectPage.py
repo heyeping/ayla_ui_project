@@ -2,6 +2,7 @@ from BaseDriver.Driver import AutoDriver
 from Helper.ElementLoader import ElementLoader
 import unittest, time
 from loguru import logger
+import allure
 
 class ProjectPage(ElementLoader):
     driver = AutoDriver()
@@ -9,6 +10,7 @@ class ProjectPage(ElementLoader):
     def __init__(self):
         ElementLoader.__init__(self, self.__class__.__name__)
 
+    @allure.step("判断是否在项目页面")
     def is_project_page(self):
         """用于判断是不是在项目页面，是返回True，不是返回False"""
         #print("进入校验")
@@ -16,6 +18,7 @@ class ProjectPage(ElementLoader):
         #print(flag)
         return flag
 
+    @allure.step("获取项目名称")
     def get_project_name(self, num=0):
         """
         从项目列表中获取项目名称
@@ -26,6 +29,7 @@ class ProjectPage(ElementLoader):
         name = project[num+1].text#num=0是"我的项目"标题
         return name
 
+    @allure.step("获取项目数")
     def get_project_num(self):
         """
         从项目列表中获取项目个数
@@ -39,6 +43,7 @@ class ProjectPage(ElementLoader):
             number = 0
         return number
 
+    @allure.step("创建项目{name},{type}")
     def add_project(self, name = "", type=False):
         """
         创建项目，默认创建展箱
@@ -61,6 +66,7 @@ class ProjectPage(ElementLoader):
         save = self.driver.find_element_until_visibility(self.locator("project_save_btn"))
         self.driver.click(save)
 
+    @allure.step("进入项目详情页")
     def intoProjectInfo(self, num=0):
         """进入项目详情页面"""
         #project_class = "android.widget.TextView"

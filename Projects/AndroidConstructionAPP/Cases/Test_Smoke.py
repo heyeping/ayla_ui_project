@@ -4,6 +4,14 @@
 #@ide: PyCharm
 #@time: 2021/6/1 10:38 AM
 
+"""
+冒烟case
+前提准备：
+有一个房间，房间下有罗马、米兰、A2网关，命名为：罗马网关、米兰网关、A2网关
+每个网关下面绑定两个设备或一个开关
+排在第一个设备不能是网关：最好是除开网关和开关的任何一个设备都可以
+"""
+
 from BaseDriver.Driver import AutoDriver
 from Projects.AndroidConstructionAPP.Pages.LoginPage import LoginPage
 from Projects.AndroidConstructionAPP.Pages.ProjectPage import ProjectPage
@@ -61,7 +69,7 @@ class TestSmoke():
         检验：1、获取当前最新项目的title，与project_name做比较
         :return:
         """
-        project_name = "项目" + str(random.randint(0, 99))
+        project_name = "自动化" + str(random.randint(0, 99)) + "_创建" + str(random.randint(0, 99))
         # with allure.step("step1: 统计当前项目个数"):
         #     old_project = self.ProjectPage.get_project_num()
         # except_num = old_project + 1
@@ -510,3 +518,46 @@ class TestSmoke():
         self.RulePage.del_rule()
         actual_toast = self.RulePage.remove_toast()
         assert actual_toast == "删除成功"
+
+    @allure.feature("方案模块")
+    @allure.story("分享方案--正向用例")
+    @allure.title("分享方案")
+    def test_24_sharePlan(self):
+        """
+        用例描述：
+        前置条件：房间下有设备
+        测试点：分享方案
+        用例步骤：1、进入房间更多页，进入方案设置页，操作分享方案
+        校验：方案口令已复制 元素存在
+        :return:
+        """
+        self.DevicePage.into_devicePage()
+        self.DevicePage.into_room_more()
+        self.DevicePage.into_plan_page()
+        share_code = self.DevicePage.get_share_plan()
+        self.DevicePage.go_to_room_list()
+        self.DevicePage.go_back()
+        assert share_code != None
+
+    @allure.feature("方案模块")
+    @allure.story("添加方案--正向用例")
+    @allure.title("添加方案")
+    #@pytest.mark.parametrize("plan_code", ["8659f82b95974d1b82449820b8e79822"])
+    def test_25_addPlan(self):
+        """
+        用例描述：
+        前置条件：先创建新房间
+        测试点：导入方案
+        用例步骤：1、先创建一个新房间，进入该房间，进行导入方案
+        :param plan_code:
+        :return:
+        """
+        plan_code = "8659f82b95974d1b82449820b8e79822"
+        self.test_02_addProject()
+        self.DevicePage.into_devicePage()
+        self.DevicePage.into_room_more()
+        self.DevicePage.into_plan_page()
+        self.DevicePage.add_plan(plan_code)
+        #actual_toast = self.DevicePage.add_sucess_toast()
+        flag = self.DevicePage.is_add_plan_succ()
+        assert flag
