@@ -11,7 +11,7 @@ if __name__ == "__main__":
     #print(base_url)
     runTestFile = os.path.join(base_url, 'Projects/AndroidConstructionAPP', 'Cases/Test_Smoke.py::TestSmoke::test_02_addHotelProject')
     #print(runTestFile)
-    reportFile = os.path.join(base_url, 'Report')
-    pytest.main(["-vs", runTestFile, f'--alluredir={reportFile}/data'])
+    #reportFile = os.path.join(base_url, 'Report')
+    #pytest.main(["-vs", runTestFile, f'--alluredir={reportFile}/data'])
     # 本地生成报告
-    os.system(f'allure generate {reportFile}/data -o {reportFile}/html --clean')
+    #os.system(f'allure generate {reportFile}/data -o {reportFile}/html --clean')
