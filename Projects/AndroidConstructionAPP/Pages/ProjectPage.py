@@ -43,7 +43,7 @@ class ProjectPage(ElementLoader):
             number = 0
         return number
 
-    @allure.step("创建项目{name},{type}")
+    @allure.step("创建项目")
     def add_project(self, name = "", type=False):
         """
         创建项目，默认创建展箱
@@ -75,6 +75,7 @@ class ProjectPage(ElementLoader):
         time.sleep(1)
         self.driver.click(project_btn[num])
 
+    @allure.step("判断项目类型")
     def projectTypeFlag(self, num=0):
         """
         判断项目类型，type为正式的，不能操作删除
@@ -91,6 +92,19 @@ class ProjectPage(ElementLoader):
         else:
             logger.info("暂无项目")
         return type_flag
+
+    @allure.step("切换地产行业")
+    def change_to_estate(self):
+        """
+        切换到地产行业
+        :return:
+        """
+        change_btn = self.driver.find_element_until_visibility(self.locator("project_page_title"))
+        self.driver.click(change_btn)
+        estate_btn = self.driver.find_element_until_visibility(self.locator("estate_change_btn"))
+        self.driver.click(estate_btn)
+        time.sleep(10)
+
 
 
 

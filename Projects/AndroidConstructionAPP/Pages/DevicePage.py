@@ -75,7 +75,7 @@ class DevicePage(ElementLoader):
             device_nums = 0
         return device_nums
 
-    @allure.step("设置房间名称{roomName}")
+    @allure.step("设置房间名称")
     def set_room_name(self, roomName=None):
         """
         设置房间名称

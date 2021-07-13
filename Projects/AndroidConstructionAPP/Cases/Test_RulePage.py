@@ -6,6 +6,7 @@
 
 from BaseDriver.Driver import AutoDriver
 from Projects.AndroidConstructionAPP.Pages.RulePage import RulePage
+from Projects.AndroidConstructionAPP.Pages.DevicePage import DevicePage
 from Projects.AndroidConstructionAPP.Config.Config import *
 import unittest
 import time,random
@@ -13,50 +14,53 @@ import time,random
 class Test_RulePage():
     driver = AutoDriver()
     RulePage = RulePage()
-    RulePage.into_rulePage()
+    DevicePage = DevicePage()
+    DevicePage.into_devicePage()
 
-    # 截图相关
-    def add_img(self):
-        self.imgs.append(self.driver.get_screenshot_by_base64())
-        return True
-
-    # 截图相关
-    def cleanup(self):
-        pass
-
-    def setUp(self):
-        print("场景页面：")
-        self.imgs = []  # 截图相关
-        self.addCleanup(self.cleanup)  # 截图相关
-        time.sleep(2)
-
-
-    def tearDown(self):
-        # self.driver.click_device_btn(4)
-        pass
-
-    def test_01_add_oneKeyRule(self):
-        """新建一键联动"""
-        rule_name = "一键联动" + str(random.randint(0,99))
+    @allure.feature("联动管理模块")
+    @allure.story("新建联动--正向用例")
+    @allure.title("新建一键联动测试")
+    def test_09_add_oneKeyRule(self):
+        """
+        用例描述：
+        测试点：新建一键联动
+        用例步骤：1、新建一键联动
+        校验：1、拿到最新一键联动的名称与创建的名称做比较
+        :return:
+        """
+        self.RulePage.into_rulePage()
+        rule_name = "一键联动" + str(random.randint(0, 99))
         self.RulePage.into_oneKey_page()
         self.RulePage.into_cloud_rule()
         self.RulePage.set_rule_name(rule_name)
         self.RulePage.add_one_key_type()
-        self.RulePage.add_actionOrCondition(0,0,0,1,1)
+        self.RulePage.add_actionOrCondition("cloud", 0, 0, 0, 1, 1)
         self.RulePage.save_rule()
         actual_name = self.RulePage.get_rule_name()
         assert actual_name == rule_name, "新建一键联动失败, 期望: %s, 实际: %s" % (rule_name, actual_name)
 
-    def test_02_add_autoCloudRule(self):
-        """新建云端自动化联动"""
-        rule_name = "云端联动" + str(random.randint(0,9999))
-        self.RulePage.into_autoRule_page()
-        self.RulePage.into_cloud_rule()
-        self.RulePage.set_rule_name(rule_name)
-        self.RulePage.add_actionOrCondition(0,0,0,0,1)
-        self.RulePage.add_actionOrCondition(4,0,0,1,1)
-        self.RulePage.save_rule()
-        actual_name = self.RulePage.get_rule_name()
-        assert actual_name == rule_name, "新建云端自动化联动失败, 期望: %s, 实际: %s" % (rule_name, actual_name)
+    # def test_01_add_oneKeyRule(self):
+    #     """新建一键联动"""
+    #     rule_name = "一键联动" + str(random.randint(0,99))
+    #     self.RulePage.into_oneKey_page()
+    #     self.RulePage.into_cloud_rule()
+    #     self.RulePage.set_rule_name(rule_name)
+    #     self.RulePage.add_one_key_type()
+    #     self.RulePage.add_actionOrCondition(0,0,0,1,1)
+    #     self.RulePage.save_rule()
+    #     actual_name = self.RulePage.get_rule_name()
+    #     assert actual_name == rule_name, "新建一键联动失败, 期望: %s, 实际: %s" % (rule_name, actual_name)
+    #
+    # def test_02_add_autoCloudRule(self):
+    #     """新建云端自动化联动"""
+    #     rule_name = "云端联动" + str(random.randint(0,9999))
+    #     self.RulePage.into_autoRule_page()
+    #     self.RulePage.into_cloud_rule()
+    #     self.RulePage.set_rule_name(rule_name)
+    #     self.RulePage.add_actionOrCondition(0,0,0,0,1)
+    #     self.RulePage.add_actionOrCondition(4,0,0,1,1)
+    #     self.RulePage.save_rule()
+    #     actual_name = self.RulePage.get_rule_name()
+    #     assert actual_name == rule_name, "新建云端自动化联动失败, 期望: %s, 实际: %s" % (rule_name, actual_name)
 
 

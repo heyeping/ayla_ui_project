@@ -60,8 +60,8 @@ class TestSmoke():
 
     @allure.feature("项目管理模块")
     @allure.story("新建项目--正向用例")
-    @allure.title("新建项目测试")
-    def test_02_addProject(self):
+    @allure.title("新建酒店项目测试")
+    def test_02_addHotelProject(self):
         """
         用例描述：
         测试点：新建项目
@@ -85,8 +85,8 @@ class TestSmoke():
 
     @allure.feature("项目管理模块")
     @allure.story("删除项目--正向用例")
-    @allure.title("删除项目测试")
-    def test_03_removeProject(self):
+    @allure.title("删除酒店项目测试")
+    def test_03_removeHotelProject(self):
         """
         用例描述：
         测试点：删除项目
@@ -561,3 +561,24 @@ class TestSmoke():
         #actual_toast = self.DevicePage.add_sucess_toast()
         flag = self.DevicePage.is_add_plan_succ()
         assert flag
+        self.DevicePage.go_back()
+        self.DevicePage.go_back()
+        self.test_03_removeProject()
+
+    @allure.feature("项目管理")
+    @allure.story("添加项目--正向用例")
+    @allure.title("创建地产项目")
+    def test_26_addEstateProject(self):
+        """
+        用例描述：
+        前置条件：切换到地产项目
+        测试点：创建地产项目
+        用例步骤：操作创建地产项目
+        校验：1、获取当前最新项目的title，与project_name做比较
+        :return:
+        """
+        project_name = "自动化" + str(random.randint(0, 99)) + "_创建" + str(random.randint(0, 99))
+        self.ProjectPage.change_to_estate()
+        self.ProjectPage.add_project(project_name)
+        actual_name = self.ProjectPage.get_project_name()
+        assert actual_name == project_name

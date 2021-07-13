@@ -1,7 +1,7 @@
 from BaseDriver.Driver import AutoDriver
 from Helper.ElementLoader import ElementLoader
 from Projects.AndroidConstructionAPP.Pages.ProjectPage import ProjectPage
-import unittest, time
+import unittest, time, allure
 from loguru import logger
 
 class MyInfoPage(ElementLoader):
@@ -11,6 +11,7 @@ class MyInfoPage(ElementLoader):
     def __init__(self):
         ElementLoader.__init__(self, self.__class__.__name__)
 
+    @allure.step("进入个人中心页")
     def into_myInfo(self):
         """
         进入个人中心页面
@@ -24,6 +25,7 @@ class MyInfoPage(ElementLoader):
         else:
             return "不在项目列表页面"
 
+    @allure.step("判断是否在个人中心页")
     def is_myInfoPage(self):
         """
         判断是否在个人中心页面
@@ -32,6 +34,7 @@ class MyInfoPage(ElementLoader):
         flag = self.driver.is_element(self.locator("myinfo_flag"), 3)
         return flag
 
+    @allure.step("退出登录")
     def logout(self):
         """
         退出登录

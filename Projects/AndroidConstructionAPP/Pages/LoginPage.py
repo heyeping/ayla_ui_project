@@ -1,7 +1,7 @@
 #coding= utf-8
 from BaseDriver.Driver import AutoDriver
 from Helper.ElementLoader import ElementLoader
-import unittest,time
+import unittest,time,allure
 
 class LoginPage(ElementLoader):
     driver = AutoDriver()
@@ -21,6 +21,7 @@ class LoginPage(ElementLoader):
         login_btn = self.driver.find_element_until_visibility(self.locator("login_button"))
         return login_btn
 
+    @allure.step("登录")
     def app_login(self, username, password):
         """
         登录APP
@@ -36,6 +37,7 @@ class LoginPage(ElementLoader):
         login_btn = self.driver.find_element_until_visibility(self.locator("login_button"))
         self.driver.click(login_btn)
 
+    @allure.step("注册账号")
     def user_register(self, register_user_name, register_account, register_pass):
         """
         注册账号
@@ -58,6 +60,7 @@ class LoginPage(ElementLoader):
         register_btn = self.driver.find_element_until_visibility(self.locator("register_btn"))
         self.driver.click(register_btn)
 
+    @allure.step("返回登录页面")
     def back_login_page(self):
         """
         返回登录页面
@@ -66,6 +69,7 @@ class LoginPage(ElementLoader):
         back_login = self.driver.find_element_until_visibility(self.locator("login_page_btn"))
         self.driver.click(back_login)
 
+    @allure.step("判断是否在登录页面")
     def is_in_login_page(self):
         """用于判断是否是在登录页面"""
         flag = self.driver.is_element(self.locator("register_page_btn"), 3)

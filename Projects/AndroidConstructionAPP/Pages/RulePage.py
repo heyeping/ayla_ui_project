@@ -3,6 +3,7 @@ from Helper.ElementLoader import ElementLoader
 import unittest, time
 from Projects.AndroidConstructionAPP.Pages.ProjectPage import ProjectPage
 from Projects.AndroidConstructionAPP.Pages.RoomPage import RoomPage
+import allure
 
 class RulePage(ElementLoader):
     driver = AutoDriver()
@@ -12,6 +13,7 @@ class RulePage(ElementLoader):
     def __init__(self):
         ElementLoader.__init__(self, self.__class__.__name__)
 
+    @allure.step("进入规则模块")
     def into_rulePage(self):
         """
         进入规则模块
@@ -25,6 +27,7 @@ class RulePage(ElementLoader):
         rulePage_btn = self.driver.find_element_until_visibility(self.locator("rule_page"))
         self.driver.click(rulePage_btn)
 
+    @allure.step("进入一键联动列表")
     def into_oneKey_page(self):
         """
         进入一键联动列表
@@ -33,6 +36,7 @@ class RulePage(ElementLoader):
         onekey_page_btn = self.driver.find_element_until_visibility(self.locator("rule_onekey_list"))
         self.driver.click(onekey_page_btn)
 
+    @allure.step("进入自动化列表页面")
     def into_autoRule_page(self):
         """
         进入自动化列表页面
@@ -41,6 +45,7 @@ class RulePage(ElementLoader):
         autoRule_page_btn = self.driver.find_element_until_visibility(self.locator("rule_auto_list"))
         self.driver.click(autoRule_page_btn)
 
+    @allure.step("获取联动名称")
     def get_rule_name(self,num=0):
         """
         获取联动名称
@@ -51,6 +56,7 @@ class RulePage(ElementLoader):
         rule_name = rule_names[num].text
         return rule_name
 
+    @allure.step("获取一键联动个数")
     def get_oneKey_rule_num(self):
         """
         从一键联动列表中获取一键联动的个数
@@ -60,6 +66,7 @@ class RulePage(ElementLoader):
         oneKey_rule_num = len(oneKey_rules)
         return oneKey_rule_num
 
+    @allure.step("进入添加云端联动")
     def into_cloud_rule(self):
         """
         进入添加云端联动页面
@@ -70,6 +77,7 @@ class RulePage(ElementLoader):
         cloud_rule_btn = self.driver.find_element_until_visibility(self.locator("cloud_rule_btn"))
         self.driver.click(cloud_rule_btn)
 
+    @allure.step("进入添加本地联动")
     def into_local_rule(self, num=0):
         """
         进入添加本地联动页面,存在多个网关时，默认进入第一个
@@ -84,6 +92,7 @@ class RulePage(ElementLoader):
             net_btn = self.driver.find_elements_until_visibility(self.locator("nets_icon"))
             self.driver.click(net_btn[num])
 
+    @allure.step("选择性进入本地联动添加页面")
     def into_select_local_rule(self, net_select='ayla'):
         """
         选择性进入本地联动添加页面
@@ -110,6 +119,7 @@ class RulePage(ElementLoader):
         else:
             return "not found"
 
+    @allure.step("设置规则名称")
     def set_rule_name(self, ruleName=None):
         """
         设置规则名称
@@ -122,6 +132,7 @@ class RulePage(ElementLoader):
         ensure_btn = self.driver.find_element_until_visibility(self.locator("done_btn"))
         self.driver.click(ensure_btn)
 
+    @allure.step("添加一键执行按钮")
     def add_one_key_type(self):
         """
         条件添加一键执行按钮
@@ -132,8 +143,7 @@ class RulePage(ElementLoader):
         type_one_key = self.driver.find_element_until_visibility(self.locator("type_one_key"))
         self.driver.click(type_one_key)
 
-
-
+    @allure.step("添加条件或动作")
     def add_actionOrCondition(self, rule_type="cloud", device_num=0, function1_num=0, function2_num=0, flag_AC=0, AC_num=1):
         """
         添加条件或动作
@@ -180,6 +190,7 @@ class RulePage(ElementLoader):
                 print("暂无设备")
             i += 1
 
+    @allure.step("保存操作")
     def save_rule(self):
         """
         保存操作
@@ -188,6 +199,7 @@ class RulePage(ElementLoader):
         save_btn = self.driver.find_element_until_visibility(self.locator("save_btn"))
         self.driver.click(save_btn)
 
+    @allure.step("统计联动个数")
     def rule_nums(self):
         """
         统计联动的个数：通过tv_device_name元素的个数统计
@@ -202,6 +214,7 @@ class RulePage(ElementLoader):
             rule_nums = 0
         return rule_nums
 
+    @allure.step("获取某个联动的状态")
     def get_rule_status(self, mun=0):
         """
         获取某个联动当前的状态：开启/关闭
@@ -216,6 +229,7 @@ class RulePage(ElementLoader):
         else:
             return "no rule"
 
+    @allure.step("改变联动状态")
     def change_rule_status(self, num=0):
         """
         改变联动状态
@@ -229,6 +243,7 @@ class RulePage(ElementLoader):
         else:
             return "no rule"
 
+    @allure.step("进入联动编辑页面")
     def into_auto_rule(self, num=0):
         """
         进入原有的联动（云端+本地）编辑页
@@ -238,7 +253,7 @@ class RulePage(ElementLoader):
         rules = self.driver.find_elements_until_visibility(self.locator("device_names"))
         self.driver.click(rules[num])
 
-
+    @allure.step("进入一键联动编辑页面")
     def into_oneKey_rule(self, num=0):
         """
         进入原有的一键联动编辑页
@@ -249,6 +264,7 @@ class RulePage(ElementLoader):
         self.driver.click(edit_btn[num])
         #time.sleep(2)
 
+    @allure.step("删除联动")
     def del_rule(self):
         """
         删除联动

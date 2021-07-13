@@ -1,6 +1,7 @@
 from BaseDriver.Driver import AutoDriver
 from Helper.ElementLoader import ElementLoader
 import unittest, time
+import allure
 
 class RoomPage(ElementLoader, unittest.TestCase):
     driver = AutoDriver()
@@ -8,10 +9,12 @@ class RoomPage(ElementLoader, unittest.TestCase):
     def __init__(self):
         ElementLoader.__init__(self, self.__class__.__name__)
 
+    @allure.step("判断是否在房间列表页面")
     def is_room_page(self):
         """判断是否在房间列表页面，是返回True，不是返回False"""
         flag = self.driver.is_element(self.locator("room_page"), 3)
 
+    @allure.step("进入房间页面")
     def into_rommPage(self):
         """进入房间页面"""
         #room_class = "android.widget.RelativeLayout"
@@ -19,6 +22,7 @@ class RoomPage(ElementLoader, unittest.TestCase):
         room_btn = self.driver.find_elements_until_visibility(self.locator("room_name"))
         self.driver.click(room_btn[1])
 
+    @allure.step("获取房间名称")
     def get_room_name(self, num = 0):
         """
         从房间列表中获取房间名称
@@ -29,6 +33,7 @@ class RoomPage(ElementLoader, unittest.TestCase):
         name = room[mun].text
         return name
 
+    @allure.step("获取房间个数")
     def get_room_num(self):
         """
         从房间列表获取房间个数
