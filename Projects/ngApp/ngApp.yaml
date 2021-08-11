@@ -1,0 +1,15 @@
+projectType: APP #项目类型，有Web和App两个选项可选
+timeout: 60 #超时时间，一般默认即可
+platformName: Android #系统平台
+platformVersion: 9 #系统版本，需根据实际情况更改
+deviceName: xiaoxiao8 #设备名称，一般默认即可
+appPackage: com.ayla.ng.app.beta #被测试的App包名，只能用于Android平台
+appActivity: com.ayla.ng.app.view.activity.WelcomeActivity #被测App的启动Activity，只用于Andriod平台
+udid: '61b32542' #此参数只有ios平台需要填写，被测手机的udid
+fullReset: False #通过卸载而不是清空数据来重置应用状态
+app: /Users/parson/Desktop/app/20200308/Lark_app_v3.3.0_20200308.apk #App存放路径
+noReset: True #在会话前重置应用状态
+#pagesToRun: Test_LoginPage #需要执行的测试用例集，为空执行全集用例
+automationName: UiAutomator2
+newCommandTimeout: 10
+codeHub: git

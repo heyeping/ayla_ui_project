@@ -14,7 +14,7 @@ class RoomPage(ElementLoader, unittest.TestCase):
         """判断是否在房间列表页面，是返回True，不是返回False"""
         flag = self.driver.is_element(self.locator("room_page"), 3)
 
-    @allure.step("进入房间页面")
+    #@allure.step("进入房间页面")
     def into_rommPage(self):
         """进入房间页面"""
         #room_class = "android.widget.RelativeLayout"

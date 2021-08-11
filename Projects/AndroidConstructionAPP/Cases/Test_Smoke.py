@@ -140,7 +140,7 @@ class TestSmoke():
         NewName = "米兰_" + str(random.randint(0,99)) + "_设备_" + str(random.randint(0,99))
         self.DevicePage.set_device_name(NewName)
         #actual_toast = self.DevicePage.sucess_toast()
-        self.DevicePage.back()
+        self.DevicePage.go_back()
         actual_name = self.DevicePage.get_device_name()
         assert actual_name == NewName
 
@@ -208,11 +208,11 @@ class TestSmoke():
         actual_toast = self.DevicePage.sucess_toast()
         assert actual_toast == "修改成功"
         # 回到设备更多页
-        self.DevicePage.back()
+        self.DevicePage.go_back()
         # 回到设备单控页
-        self.DevicePage.back()
+        self.DevicePage.go_back()
         # 回到设备列表页面
-        self.DevicePage.back()
+        self.DevicePage.go_back()
 
     #@pytest.mark.skip(reason='skip testing this')
     @allure.feature("联动管理模块")
@@ -517,6 +517,8 @@ class TestSmoke():
         self.RulePage.into_auto_rule()
         self.RulePage.del_rule()
         actual_toast = self.RulePage.remove_toast()
+        self.DevicePage.back()
+        self.DevicePage.back()
         assert actual_toast == "删除成功"
 
     @allure.feature("方案模块")
